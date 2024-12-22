@@ -1,0 +1,57 @@
+/* Main Stylesheet with CSS Variables */
+
+/* Define CSS Variables */
+:root {
+    /* Color Variables */
+    --color-background: #f4f4f4;
+    --color-text: #333333;
+    --color-header-bg: #35424a;
+    --color-header-text: #ffffff;
+    --color-footer-bg: #35424a;
+    --color-footer-text: #ffffff;
+
+    /* Font Size Variables */
+    --font-size-base: 16px;
+    --font-size-header: 2rem; /* Equivalent to 32px */
+    --font-size-footer: 0.875rem; /* Equivalent to 14px */
+
+    /* Font Family */
+    --font-family-primary: Arial, sans-serif;
+}
+
+/* Apply Base Styles */
+body {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: 20px;
+}
+
+header {
+    background-color: var(--color-header-bg);
+    color: var(--color-header-text);
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: var(--font-size-header);
+}
+
+main {
+    margin: 20px 0;
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-size: var(--font-size-footer);
+}
