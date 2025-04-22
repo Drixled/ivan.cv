@@ -1,7 +1,5 @@
-/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400&display=swap');
 
-/* CSS Variables */
 :root {
   --color-background: #000000;
   --color-text: #c4d0cd;
@@ -12,7 +10,6 @@
   --title-space: 1rem;
 }
 
-/* Base Styles */
 body {
   background-color: var(--color-background);
   color: var(--color-text);
@@ -24,7 +21,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography - Headings */
 h1, .title-1,
 h2, .title-2,
 h3, .title-3,
@@ -74,7 +70,6 @@ h6, .title-6 {
   letter-spacing: 0em;
 }
 
-/* Typography - Body Text */
 p, .max-w-text {
   max-width: 768px;
 }
@@ -100,7 +95,6 @@ label, figcaption, input, .body-2 {
   letter-spacing: 0.118em;
 }
 
-/* Typography - Bold Text */
 p.bold, span.bold,
 .body-1.bold, .body-2.bold,
 p .bold, span .bold,
@@ -112,7 +106,6 @@ p b, span b,
   font-weight: 700;
 }
 
-/* Spacing */
 .space-text-above,
 p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
 h1+h2, h2+h3, h3+h4, h4+h5, h5+h6 {
@@ -132,7 +125,6 @@ h1+p, h2+p, h3+p, h4+p, h5+p, h6+p,
   margin-bottom: var(--paragraph-space);
 }
 
-/* Layout */
 main {
   min-height: 100vh;
   display: grid;
@@ -144,7 +136,6 @@ main {
   padding: 20px;
 }
 
-/* Logo */
 .logo {
   display: block;
   width: 190px;
@@ -159,7 +150,6 @@ main {
   -o-user-drag: none;
 }
 
-/* Utility Classes */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -183,7 +173,6 @@ main {
   margin-top: 2rem;
 }
 
-/* Social Media Icons */
 .social-media {
   margin-top: 3rem;
 }
