@@ -140,14 +140,17 @@ main {
   display: block;
   width: 190px;
   height: auto;
-  margin-bottom: 1.5rem;
-  margin-left: -2rem;
+
   user-select: none;
   pointer-events: none;
   -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
+}
+
+.logo-webgl {
+  width: 190px;
+  height: 190px;
+  margin-bottom: 1.5rem;
+  margin-left: -2rem;
 }
 
 .visually-hidden {

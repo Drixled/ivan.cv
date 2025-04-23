@@ -24,15 +24,22 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="favicon.ico">
-  <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.18/dist/unicornStudio.umd.js"></script>
 </head>
 
 <body>
   <main>
     <div class="container">
       <header>
-        <img src="logo.png" alt="Iván Uruchurtu Logo" class="logo" width="190" height="auto">
+        <div class="logo-webgl"
+          data-us-project-src="logo.json"
+          data-us-scale="1" 
+          data-us-dpi="2" 
+          data-us-lazyload="true" 
+          data-us-disablemobile="false">
+        </div>
+        <!-- <img src="logo.png" alt="Iván Uruchurtu Logo" class="logo" width="190" height="auto"> -->
         <h1>Iván Uruchurtu</h1>
         <p class="tagline">Designer · Shaping software, teams, and tactile experiences</p>
       </header>
@@ -75,5 +82,7 @@
     </div>
   </main>
 </body>
-
+<script>
+  UnicornStudio.init();
+</script>
 </html>
