@@ -208,3 +208,21 @@ main {
 .social-icons i {
   font-size: 1.3rem;
 }
+
+.fade-stagger {
+  opacity: 0;
+  transform: translateY(6px);
+  transition-property: opacity, transform;
+  transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  will-change: opacity, transform;
+}
+
+.fade-stagger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+::selection {
+  background: rgba(255, 215, 0, 0.25);
+  color: black;
+}

@@ -32,7 +32,7 @@
   <main>
     <div class="container">
       <header>
-        <div class="logo-webgl"
+        <div class="logo-webgl fade-stagger" data-stagger="15"
           data-us-project-src="logo.json"
           data-us-scale="1" 
           data-us-dpi="2" 
@@ -40,39 +40,39 @@
           data-us-disablemobile="false">
         </div>
         <!-- <img src="logo.png" alt="Iván Uruchurtu Logo" class="logo" width="190" height="auto"> -->
-        <h1>Iván Uruchurtu</h1>
-        <p class="tagline">Designer · Shaping software, teams, and tactile experiences</p>
+        <h1 class="fade-stagger" data-stagger="1">Iván Uruchurtu</h1>
+        <p class="tagline fade-stagger" data-stagger="2">Designer · Shaping software, teams, and tactile experiences</p>
       </header>
       
       <section class="about" aria-labelledby="about-heading">
         <h2 id="about-heading" class="visually-hidden">About Me</h2>
         
         <article>
-          <p>Over the past decade, I've designed for early-stage startups across B2C, B2B, and developer tools. Some of that work was for companies backed by Sequoia and Zetta.</p>
-          <p>I've led end-to-end design, from product to brand, and helped technical products make sense to real people.</p>
-          <p>Beyond software, I design custom keyboards and keycaps as tactile artifacts—built with care, meant to be felt.</p>
+          <p class="fade-stagger" data-stagger="3">Over the past decade, I've designed for early-stage startups across B2C, B2B, and developer tools. Some of that work was for companies backed by Sequoia and Zetta.</p>
+          <p class="fade-stagger" data-stagger="4">I've led end-to-end design, from product to brand, and helped technical products make sense to real people.</p>
+          <p class="fade-stagger" data-stagger="5">Beyond software, I design custom keyboards and keycaps as tactile artifacts—built with care, meant to be felt.</p>
         </article>
       </section>
       
       <nav class="social-media" aria-labelledby="social-heading">
         <h2 id="social-heading" class="visually-hidden">Connect with me</h2>
         <ul class="social-icons">
-          <li>
+          <li class="fade-stagger" data-stagger="6">
             <a href="https://www.instagram.com/vheissudotme" target="_blank" rel="noopener noreferrer" aria-label="Follow me on Instagram">
               <i class="ph ph-instagram-logo" aria-hidden="true"></i>
             </a>
           </li>
-          <li>
+          <li class="fade-stagger" data-stagger="7">
             <a href="https://x.com/vheissu_" target="_blank" rel="noopener noreferrer" aria-label="Follow me on X (formerly Twitter)">
               <i class="ph ph-x-logo" aria-hidden="true"></i>
             </a>
           </li>
-          <li>
+          <li class="fade-stagger" data-stagger="8">
             <a href="https://www.linkedin.com/in/vheissu/" target="_blank" rel="noopener noreferrer" aria-label="Connect with me on LinkedIn">
               <i class="ph ph-linkedin-logo" aria-hidden="true"></i>
             </a>
           </li>
-          <li>
+          <li class="fade-stagger" data-stagger="9">
             <a href="mailto:hello@vheissu.me" aria-label="Send me an email">
               <i class="ph ph-envelope" aria-hidden="true"></i>
             </a>
@@ -84,5 +84,15 @@
 </body>
 <script>
   UnicornStudio.init();
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fade-stagger').forEach((el) => {
+      const index = parseInt(el.dataset.stagger || 0, 10);
+      const delay = index * 120;
+      const duration = 500 + index * 60;
+      el.style.transitionDelay = `${delay}ms`;
+      el.style.transitionDuration = `${duration}ms`;
+      el.classList.add('visible');
+    });
+  });
 </script>
 </html>
