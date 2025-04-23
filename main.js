@@ -5,7 +5,7 @@ UnicornStudio.init();
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.fade-stagger').forEach((el) => {
     const index = parseInt(el.dataset.stagger || 0, 10);
-    const delay = index * 120;
+    const delay = index * 60;
     const duration = 500 + index * 60;
     el.style.transitionDelay = `${delay}ms`;
     el.style.transitionDuration = `${duration}ms`;
