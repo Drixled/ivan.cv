@@ -16,7 +16,7 @@
   <meta name="description" content="Iván Uruchurtu - Product Designer specializing in developer tools, B2B platforms, and custom mechanical keyboards. Over a decade of experience in early-stage startups.">
   <meta name="author" content="Iván Uruchurtu">
   <meta name="keywords" content="product design, UX design, developer tools, B2B platforms, mechanical keyboards, custom keycaps">
-  <title>Iván Uruchurtu - Product Designer</title> 
+  <title>Iván Uruchurtu - Designer</title> 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -85,14 +85,24 @@
 <script>
   UnicornStudio.init();
   window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.fade-stagger').forEach((el) => {
-      const index = parseInt(el.dataset.stagger || 0, 10);
-      const delay = index * 120;
-      const duration = 500 + index * 60;
-      el.style.transitionDelay = `${delay}ms`;
-      el.style.transitionDuration = `${duration}ms`;
-      el.classList.add('visible');
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.fade-stagger').forEach((el) => {
+        const index = parseInt(el.style.getPropertyValue('--order') || 0, 10);
+        const delay = index * 80;
+        const duration = 350 + index * 30;
+        el.style.transitionDelay = `${delay}ms`;
+        el.style.transitionDuration = `${duration}ms`;
+        el.style.willChange = 'opacity, transform';
+        el.style.transform = 'translateY(10px) scale(0.98)';
+        el.style.opacity = '0';
+
+        // let layout paint, then trigger
+        setTimeout(() => {
+          el.classList.add('visible');
+        }, 0);
+      });
     });
   });
+
 </script>
 </html>
