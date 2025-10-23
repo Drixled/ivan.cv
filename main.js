@@ -23,6 +23,31 @@ const myTimezone = "America/Mexico_City";
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const now = new Date();
+
+// Calculate timezone offsets to compare accurately
+const getTimezoneOffset = (date, timezone) => {
+  const utcDate = new Date(date.toLocaleString("en-US", { timeZone: "UTC" }));
+  const tzDate = new Date(date.toLocaleString("en-US", { timeZone: timezone }));
+  return (tzDate.getTime() - utcDate.getTime()) / 60000; // offset in minutes
+};
+
+const myOffset = getTimezoneOffset(now, myTimezone);
+const userOffset = getTimezoneOffset(now, userTimezone);
+const isSameTime = myOffset === userOffset;
+
+// Get timezone abbreviations
+const getTimezoneAbbr = (timezone) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    timeZoneName: "short",
+  }).formatToParts(now);
+  return parts.find((part) => part.type === "timeZoneName")?.value || "";
+};
+
+const myTzAbbr = getTimezoneAbbr(myTimezone);
+const userTzAbbr = getTimezoneAbbr(userTimezone);
+
+// Format times for display
 const myTime = new Intl.DateTimeFormat("en-US", {
   timeZone: myTimezone,
   hour: "numeric",
@@ -38,10 +63,10 @@ const userTime = new Intl.DateTimeFormat("en-US", {
 }).format(now);
 
 let message;
-if (myTime === userTime) {
-  message = `We're on the same clock — ${myTime} here too.`;
+if (isSameTime) {
+  message = `We're on the same clock — ${myTime} ${myTzAbbr} here too.`;
 } else {
-  message = `While it's ${myTime} for me, it's ${userTime} for you — still the same planet though :)`;
+  message = `While it's ${myTime} ${myTzAbbr} for me, it's ${userTime} ${userTzAbbr} for you — still the same planet though :)`;
 }
 
 document.getElementById("timezone-message").innerText = message;
