@@ -39,7 +39,7 @@ const userTime = new Intl.DateTimeFormat("en-US", {
 
 let message;
 if (myTime === userTime) {
-  message = `we're on the same clock — ${myTime} here too.`;
+  message = `We're on the same clock — ${myTime} here too.`;
 } else {
   message = `While it's ${myTime} for me, it's ${userTime} for you — still the same planet though :)`;
 }
