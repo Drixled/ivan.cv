@@ -19,29 +19,27 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // Dynamic Timezone Diff
 
-// Your timezone in hours offset from UTC
-const myTimeZoneOffset = -6; // CST
+const myTimezone = "America/Mexico_City";
+const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-// Get user's local timezone offset in hours (note: JS returns it in minutes and it's *opposite* sign)
-const userOffset = -new Date().getTimezoneOffset() / 60;
-const diff = userOffset - myTimeZoneOffset;
+const now = new Date();
+const myTime = new Intl.DateTimeFormat("en-US", {
+  timeZone: myTimezone,
+  hour: "numeric",
+  minute: "2-digit",
+  hour12: true,
+}).format(now);
 
-// Time difference calculation
-const myNoon = 12;
-const userTime = (myNoon + diff + 24) % 24;
-const userHour24 = Math.floor(userTime);
-const userMinute = Math.round((userTime - userHour24) * 60);
+const userTime = new Intl.DateTimeFormat("en-US", {
+  timeZone: userTimezone,
+  hour: "numeric",
+  minute: "2-digit",
+  hour12: true,
+}).format(now);
 
-// Convert to 12-hour format
-const period = userHour24 >= 12 ? "PM" : "AM";
-const userHour12 = userHour24 % 12 === 0 ? 12 : userHour24 % 12;
-const formattedUserTime = `${userHour12}:${userMinute.toString().padStart(2, "0")} ${period}`;
+const message = `While it's ${myTime} for me, it's ${userTime} for you — still the same planet though :)`;
 
-// Build the message
-const message = `When it's noon for me (CST), it's already ${formattedUserTime} for you`;
-
-// Inject it into the DOM
-document.getElementById("time-diff-msg").textContent = message;
+document.getElementById("timezone-message").innerText = message;
 
 // Custom Clipboard
 

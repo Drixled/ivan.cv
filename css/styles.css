@@ -220,7 +220,7 @@ main {
   transform: translateY(0);
 }
 
-#time-diff-msg {
+#timezone-message {
   font-style: italic;
   opacity: 0.8;
 }
