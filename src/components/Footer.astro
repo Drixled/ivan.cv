@@ -1,0 +1,32 @@
+---
+const year = new Date().getFullYear();
+
+const socialLinks = [
+  { href: 'https://x.com/vheissu_', label: 'X' },
+  { href: 'https://www.linkedin.com/in/vheissu/', label: 'LinkedIn' },
+  { href: 'https://www.instagram.com/vheissudotme', label: 'Instagram' },
+];
+---
+
+<footer class="px-6 py-8 max-w-3xl mx-auto w-full text-sm text-text-secondary">
+  <div class="flex flex-col sm:flex-row justify-between gap-4">
+    <div class="flex gap-4">
+      {socialLinks.map(link => (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-text-primary transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <div class="flex gap-4">
+      <a href="mailto:hello@ivan.cv" class="hover:text-text-primary transition-colors">
+        hello@ivan.cv
+      </a>
+      <span>&copy; {year} Ivan Uruchurtu</span>
+    </div>
+  </div>
+</footer>
