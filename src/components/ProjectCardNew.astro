@@ -19,10 +19,12 @@ const { title, role, period, thumbnail, slug } = Astro.props;
         <img
           src={thumbnail}
           alt={title}
-          class="absolute inset-0 w-full h-[306px] object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300"
+          class="absolute top-0 left-0 right-0 z-10 w-full h-[338px] object-cover rounded-2xl group-hover:h-[306px] transition-all duration-300"
         />
       ) : (
-        <div class="absolute inset-0 w-full h-[306px] bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
+        <div class="absolute top-0 left-0 right-0 z-10 w-full h-[338px] bg-[#121212] rounded-2xl group-hover:h-[306px] transition-all duration-300">
+          <div class="w-full h-full bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
+        </div>
       )}
 
       <!-- Role Badge -->
