@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const colors = [
+  { name: 'Background', value: '#000000', cssVar: '--color-background' },
+  { name: 'Card', value: '#0D0D0D', cssVar: '--color-card' },
+  { name: 'Text Primary', value: '#A6ABA4', cssVar: '--color-text-primary' },
+  { name: 'Text Secondary', value: '#6B7468', cssVar: '--color-text-secondary' },
+];
+
+const spacingScale = [
+  { name: 'gap-1', value: '4px', width: 4 },
+  { name: 'gap-2', value: '8px', width: 8 },
+  { name: 'gap-4', value: '16px', width: 16 },
+  { name: 'gap-6', value: '24px', width: 24 },
+  { name: 'gap-8', value: '32px', width: 32 },
+  { name: 'gap-12', value: '48px', width: 48 },
+];
+
+const codeExample = `function greet(name: string) {
+  return \`Hello, \${name}!\`;
+}`;
+
+const sections = [
+  { id: 'typography', label: 'Typography' },
+  { id: 'fonts', label: 'Fonts' },
+  { id: 'colors', label: 'Colors' },
+  { id: 'spacing', label: 'Spacing' },
+  { id: 'buttons', label: 'Buttons' },
+  { id: 'cards', label: 'Cards' },
+  { id: 'code', label: 'Code' },
+  { id: 'selection', label: 'Selection' },
+];
+---
+
+<BaseLayout title="Style Guide | Ivan Uruchurtu">
+  <div class="px-6 py-12 max-w-3xl mx-auto w-full">
+    <header class="mb-12">
+      <h1 class="text-2xl font-medium text-text-primary mb-2">Style Guide</h1>
+      <p class="text-text-secondary mb-8">Internal reference for typography, colors, and components.</p>
+
+      <nav class="flex flex-wrap gap-2">
+        {sections.map((section) => (
+          <a
+            href={`#${section.id}`}
+            class="text-sm px-3 py-1.5 bg-card rounded-md text-text-secondary hover:text-text-primary hover:bg-card/80 transition-colors"
+          >
+            {section.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+
+    <div class="space-y-8">
+      <!-- Typography -->
+      <section id="typography" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Typography</h2>
+
+        <div class="space-y-8">
+          <div class="space-y-2">
+            <h1 class="text-2xl font-medium text-text-primary">Heading 1 — Page Titles</h1>
+            <p class="text-sm text-text-secondary opacity-60">text-2xl font-medium text-text-primary</p>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="text-lg font-medium text-text-primary">Heading 2 — Section Headings</h2>
+            <p class="text-sm text-text-secondary opacity-60">text-lg font-medium text-text-primary</p>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="text-base font-medium text-text-primary">Heading 3 — Subsections</h3>
+            <p class="text-sm text-text-secondary opacity-60">text-base font-medium text-text-primary</p>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-text-secondary leading-relaxed">
+              Paragraph — Body text for main content. Over the past decade, I've designed for early-stage startups across B2C, B2B, and developer tools.
+            </p>
+            <p class="text-sm text-text-secondary opacity-60">text-text-secondary leading-relaxed</p>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-sm text-text-secondary">
+              Paragraph Small — Used for metadata, descriptions, and secondary information.
+            </p>
+            <p class="text-sm text-text-secondary opacity-60">text-sm text-text-secondary</p>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-sm uppercase tracking-wide text-text-secondary">Caption / Label</p>
+            <p class="text-sm text-text-secondary opacity-60">text-sm uppercase tracking-wide text-text-secondary</p>
+          </div>
+
+          <div class="space-y-2">
+            <p>
+              <a href="#" class="text-text-primary underline underline-offset-2 hover:text-text-secondary transition-colors">Link — Interactive text</a>
+            </p>
+            <p class="text-sm text-text-secondary opacity-60">text-text-primary underline underline-offset-2 hover:text-text-secondary</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fonts -->
+      <section id="fonts" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Fonts</h2>
+
+        <div class="space-y-6">
+          <div class="bg-background rounded-lg p-4">
+            <p class="text-text-primary text-xl mb-2 font-sans">Atkinson Hyperlegible</p>
+            <p class="text-text-secondary text-sm mb-4">Primary font for all UI and body text</p>
+            <p class="text-text-primary font-sans">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+              abcdefghijklmnopqrstuvwxyz<br />
+              0123456789
+            </p>
+          </div>
+
+          <div class="bg-background rounded-lg p-4">
+            <p class="text-text-primary text-xl mb-2 font-serif">Instrument Serif</p>
+            <p class="text-text-secondary text-sm mb-4">Accent font (available for special use)</p>
+            <p class="text-text-primary font-serif text-lg">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />
+              abcdefghijklmnopqrstuvwxyz<br />
+              0123456789
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Colors</h2>
+
+        <div class="grid grid-cols-2 gap-4">
+          {colors.map((color) => (
+            <div class="space-y-2">
+              <div
+                class="h-16 rounded-lg border border-text-secondary/20"
+                style={`background-color: ${color.value};`}
+              ></div>
+              <p class="text-text-primary text-sm font-medium">{color.name}</p>
+              <p class="text-text-secondary text-sm">{color.value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Spacing Scale -->
+      <section id="spacing" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Spacing Scale</h2>
+
+        <div class="space-y-3">
+          {spacingScale.map((space) => (
+            <div class="flex items-center gap-4">
+              <div
+                class="h-4 bg-text-primary rounded"
+                style={`width: ${space.width * 3}px;`}
+              ></div>
+              <p class="text-text-secondary text-sm w-16">{space.name}</p>
+              <p class="text-text-secondary text-sm opacity-60">{space.value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section id="buttons" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Buttons</h2>
+
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <p class="text-sm text-text-secondary">Primary</p>
+            <div class="flex flex-wrap gap-4">
+              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium hover:bg-text-primary/90 transition-colors">
+                Primary Button
+              </button>
+              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed">
+                Disabled
+              </button>
+            </div>
+            <p class="text-sm text-text-secondary opacity-60">bg-text-primary text-background px-4 py-2 rounded-lg font-medium</p>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm text-text-secondary">Secondary</p>
+            <div class="flex flex-wrap gap-4">
+              <button class="border border-text-secondary text-text-primary px-4 py-2 rounded-lg font-medium hover:border-text-primary hover:bg-background transition-colors">
+                Secondary Button
+              </button>
+              <button class="border border-text-secondary text-text-secondary px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed">
+                Disabled
+              </button>
+            </div>
+            <p class="text-sm text-text-secondary opacity-60">border border-text-secondary text-text-primary px-4 py-2 rounded-lg</p>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm text-text-secondary">Ghost</p>
+            <div class="flex flex-wrap gap-4">
+              <button class="text-text-primary underline underline-offset-2 hover:text-text-secondary transition-colors">
+                Ghost Button
+              </button>
+            </div>
+            <p class="text-sm text-text-secondary opacity-60">text-text-primary underline underline-offset-2 (link style)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cards -->
+      <section id="cards" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Cards</h2>
+
+        <div class="space-y-4">
+          <div class="bg-background rounded-lg p-4 hover:bg-background/80 transition-colors cursor-pointer border border-text-secondary/10">
+            <div class="aspect-video bg-card rounded-md mb-4 flex items-center justify-center">
+              <span class="text-text-secondary text-sm">Image Placeholder</span>
+            </div>
+            <h3 class="text-text-primary font-medium mb-1">Card Title</h3>
+            <p class="text-text-secondary text-sm">Company &middot; 2024</p>
+            <p class="text-text-secondary text-sm">Role description goes here</p>
+          </div>
+          <p class="text-sm text-text-secondary opacity-60">bg-card rounded-lg p-4 hover:bg-card/80 transition-colors</p>
+        </div>
+      </section>
+
+      <!-- Code -->
+      <section id="code" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Code</h2>
+
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <p class="text-sm text-text-secondary">Inline Code</p>
+            <p class="text-text-secondary">
+              Use <code class="bg-background px-1.5 py-0.5 rounded text-sm text-text-primary">const example = true;</code> for inline snippets.
+            </p>
+            <p class="text-sm text-text-secondary opacity-60">bg-card px-1.5 py-0.5 rounded text-sm</p>
+          </div>
+
+          <div class="space-y-3">
+            <p class="text-sm text-text-secondary">Code Block</p>
+            <pre class="bg-background rounded-lg p-4 overflow-x-auto"><code class="text-sm text-text-primary">{codeExample}</code></pre>
+            <p class="text-sm text-text-secondary opacity-60">bg-card rounded-lg p-4 overflow-x-auto</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Selection -->
+      <section id="selection" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Selection Highlight</h2>
+
+        <div class="bg-background rounded-lg p-4">
+          <p class="text-text-secondary leading-relaxed">
+            Select this text to see the highlight style. The selection uses text-secondary (#6B7468) as background with the background color (#000000) for text, creating an inverted effect.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
