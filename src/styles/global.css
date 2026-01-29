@@ -94,3 +94,9 @@ body {
   background: none;
   padding: 0;
 }
+
+/* Faster view transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 150ms;
+}

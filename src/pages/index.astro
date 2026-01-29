@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import ProjectCardNew from '../components/ProjectCardNew.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
@@ -21,13 +21,12 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
     {sortedProjects.length > 0 && (
       <section>
         <h2 class="text-sm text-text-secondary mb-6 uppercase tracking-wide">Projects</h2>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-6">
           {sortedProjects.map((project) => (
-            <ProjectCard
+            <ProjectCardNew
               title={project.data.title}
-              company={project.data.company}
-              period={project.data.period}
               role={project.data.role}
+              period={project.data.period}
               thumbnail={project.data.thumbnail}
               slug={project.id}
             />

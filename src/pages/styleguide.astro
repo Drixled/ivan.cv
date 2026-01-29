@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCardNew from '../components/ProjectCardNew.astro';
 
 const colors = [
   { name: 'Background', value: '#000000', cssVar: '--color-background' },
@@ -28,6 +29,7 @@ const sections = [
   { id: 'spacing', label: 'Spacing' },
   { id: 'buttons', label: 'Buttons' },
   { id: 'cards', label: 'Cards' },
+  { id: 'project-card', label: 'Project Card' },
   { id: 'code', label: 'Code' },
   { id: 'selection', label: 'Selection' },
 ];
@@ -221,6 +223,20 @@ const sections = [
           </div>
           <p class="text-sm text-text-secondary opacity-60">bg-card rounded-lg p-4 hover:bg-card/80 transition-colors</p>
         </div>
+      </section>
+
+      <!-- Project Card (New Design) -->
+      <section id="project-card" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Project Card (New)</h2>
+
+        <div class="max-w-[500px]">
+          <ProjectCardNew
+            title="GMK Mictlan / Demiura"
+            role="Founding Designer"
+            period="2023 - 2025"
+          />
+        </div>
+        <p class="text-sm text-text-secondary opacity-60 mt-4">New card design with gradient role text and arrow button</p>
       </section>
 
       <!-- Code -->
