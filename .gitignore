@@ -59,6 +59,7 @@ Thumbs.db
 coverage/
 .nyc_output/
 .jest/
+.playwright-mcp/
 
 # Temporary files
 *.tmp
