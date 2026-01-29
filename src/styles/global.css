@@ -100,3 +100,17 @@ body {
 ::view-transition-new(root) {
   animation-duration: 150ms;
 }
+
+/* Slow spin animation */
+@keyframes slow-spin {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.animate-slow-spin {
+  animation: slow-spin 60s linear infinite;
+}

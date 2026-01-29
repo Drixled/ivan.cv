@@ -1,4 +1,6 @@
 ---
+import ShapesGlow from './ShapesGlow';
+
 const currentPath = Astro.url.pathname;
 
 const links = [
@@ -9,8 +11,9 @@ const links = [
 ];
 ---
 
-<nav class="px-6 py-8 max-w-3xl mx-auto w-full">
-  <ul class="flex gap-6 text-sm">
+<nav class="px-6 py-8 max-w-3xl mx-auto w-full relative">
+  <ShapesGlow client:load transition:persist="shapes-glow" />
+  <ul class="flex gap-6 text-sm relative">
     {links.map(link => (
       <li>
         <a
