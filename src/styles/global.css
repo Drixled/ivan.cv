@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Ultralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-background: #000000;
   --color-card: #0D0D0D;
@@ -7,7 +15,7 @@
   --color-text-secondary: #6B7468;
 
   --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-display: "PP Editorial Old", ui-serif, Georgia, serif;
 }
 
 html {

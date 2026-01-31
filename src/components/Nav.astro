@@ -6,6 +6,7 @@ const currentPath = Astro.url.pathname;
 const links = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
+  { href: '/cv', label: 'CV', external: true },
   { href: '/playground', label: 'Playground' },
   { href: '/styleguide', label: 'Style Guide' },
 ];
@@ -13,7 +14,7 @@ const links = [
 
 <nav class="px-6 py-8 max-w-3xl mx-auto w-full relative">
   <ShapesGlow client:load transition:persist="shapes-glow" />
-  <ul class="flex gap-6 text-sm relative">
+  <ul class="flex justify-center gap-6 text-sm relative">
     {links.map(link => (
       <li>
         <a
@@ -22,6 +23,7 @@ const links = [
             "transition-colors hover:text-text-primary",
             currentPath === link.href ? "text-text-primary" : "text-text-secondary"
           ]}
+          {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           {link.label}
         </a>

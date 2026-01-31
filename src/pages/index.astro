@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCardNew from '../components/ProjectCardNew.astro';
+import Hero from '../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
@@ -9,18 +10,10 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 
 <BaseLayout>
   <div class="px-6 py-12 max-w-3xl mx-auto w-full">
-    <header class="mb-16">
-      <h1 class="text-2xl font-medium mb-2">Ivan Uruchurtu</h1>
-      <p class="text-text-secondary mb-6">Product Designer &middot; Design Engineer</p>
-      <p class="text-text-secondary leading-relaxed max-w-xl">
-        Over the past decade, I've designed for early-stage startups across B2C, B2B, and developer tools.
-        I've led end-to-end design, from product to brand, and helped technical products make sense to real people.
-      </p>
-    </header>
+    <Hero />
 
     {sortedProjects.length > 0 && (
       <section>
-        <h2 class="text-sm text-text-secondary mb-6 uppercase tracking-wide">Projects</h2>
         <div class="flex flex-col gap-6">
           {sortedProjects.map((project) => (
             <ProjectCardNew
