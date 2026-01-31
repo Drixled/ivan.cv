@@ -14,7 +14,7 @@
   --color-text-primary: #A6ABA4;
   --color-text-secondary: #6B7468;
 
-  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-display: "PP Editorial Old", ui-serif, Georgia, serif;
 }
 
@@ -26,6 +26,8 @@ html {
 body {
   font-family: var(--font-sans);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
@@ -103,10 +105,11 @@ body {
   padding: 0;
 }
 
-/* Faster view transitions */
+/* View transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 150ms;
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Slow spin animation */

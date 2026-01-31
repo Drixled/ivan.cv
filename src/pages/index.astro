@@ -9,7 +9,7 @@ const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <BaseLayout>
-  <div class="px-6 py-12 max-w-3xl mx-auto w-full">
+  <div class="px-6 py-12 max-w-[640px] mx-auto w-full">
     <Hero />
 
     {sortedProjects.length > 0 && (

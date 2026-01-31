@@ -9,9 +9,10 @@ interface Props {
     period: string;
     role: string;
   };
+  slug: string;
 }
 
-const { frontmatter } = Astro.props;
+const { frontmatter, slug } = Astro.props;
 ---
 
 <BaseLayout title={`${frontmatter.title} | Ivan Uruchurtu`} description={frontmatter.description}>
@@ -23,8 +24,10 @@ const { frontmatter } = Astro.props;
       &larr; Back
     </a>
 
-    <header class="mb-12">
-      <h1 class="text-2xl font-medium text-text-primary mb-2">{frontmatter.title}</h1>
+    <header class="mb-12 text-center">
+      <h1 class="text-7xl font-display text-text-primary mb-4 leading-[1.1]">
+        {frontmatter.title}
+      </h1>
       <p class="text-text-secondary">
         {frontmatter.company} &middot; {frontmatter.period}
       </p>
