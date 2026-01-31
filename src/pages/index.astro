@@ -5,27 +5,86 @@ import Hero from '../components/Hero.astro';
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
-const sortedProjects = projects.sort((a, b) => a.data.order - b.data.order);
+const projectMap = Object.fromEntries(projects.map(p => [p.id, p]));
+
+// Manual order: neurelo, demiura, rever, mediwallet
+const neurelo = projectMap['neurelo'];
+const demiura = projectMap['demiura'];
+const rever = projectMap['rever'];
+const mediwallet = projectMap['mediwallet'];
 ---
 
 <BaseLayout>
-  <div class="px-6 py-12 max-w-[640px] mx-auto w-full">
-    <Hero />
+  <div class="px-6 py-12 max-w-6xl mx-auto w-full">
+    <!-- Row 1: Hero -->
+    <div class="mb-8">
+      <Hero />
+    </div>
 
-    {sortedProjects.length > 0 && (
-      <section>
-        <div class="flex flex-col gap-6">
-          {sortedProjects.map((project) => (
-            <ProjectCardNew
-              title={project.data.title}
-              role={project.data.role}
-              period={project.data.period}
-              thumbnail={project.data.thumbnail}
-              slug={project.id}
-            />
-          ))}
+    <!-- Row 2: Neurelo (bigger) + Demiura (smaller) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
+      {neurelo && (
+        <div class="md:col-span-7 h-[400px]">
+          <ProjectCardNew
+            title={neurelo.data.title}
+            role={neurelo.data.role}
+            period={neurelo.data.period}
+            thumbnail={neurelo.data.thumbnail}
+            slug={neurelo.id}
+            bento={true}
+          />
         </div>
-      </section>
-    )}
+      )}
+
+      {demiura && (
+        <div class="md:col-span-5 h-[400px]">
+          <ProjectCardNew
+            title={demiura.data.title}
+            role={demiura.data.role}
+            period={demiura.data.period}
+            thumbnail={demiura.data.thumbnail}
+            slug={demiura.id}
+            bento={true}
+          />
+        </div>
+      )}
+    </div>
+
+    <!-- Row 3: Rever (smaller) + Mediwallet (bigger) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
+      {rever && (
+        <div class="md:col-span-5 h-[400px]">
+          <ProjectCardNew
+            title={rever.data.title}
+            role={rever.data.role}
+            period={rever.data.period}
+            thumbnail={rever.data.thumbnail}
+            slug={rever.id}
+            bento={true}
+          />
+        </div>
+      )}
+
+      {mediwallet && (
+        <div class="md:col-span-7 h-[400px]">
+          <ProjectCardNew
+            title={mediwallet.data.title}
+            role={mediwallet.data.role}
+            period={mediwallet.data.period}
+            thumbnail={mediwallet.data.thumbnail}
+            slug={mediwallet.id}
+            bento={true}
+          />
+        </div>
+      )}
+    </div>
+
+    <!-- Contact card -->
+    <a href="mailto:hello@ivan.cv" class="block bg-card hover:bg-card/80 transition-colors rounded-2xl p-4 flex items-center justify-between group">
+      <span class="text-text-primary text-sm">Let's work together</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="text-text-secondary group-hover:text-text-primary transition-colors">
+        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
   </div>
 </BaseLayout>
