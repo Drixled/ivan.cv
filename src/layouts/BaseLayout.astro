@@ -31,10 +31,12 @@ const {
     <ViewTransitions />
   </head>
   <body class="flex flex-col min-h-screen">
-    <Nav />
-    <main class="flex-1">
-      <slot />
-    </main>
-    <Footer />
+    <div class="px-6 max-w-5xl mx-auto w-full flex flex-col min-h-screen">
+      <Nav />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
