@@ -3,6 +3,8 @@ import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import StylesPanel from '../components/inspector/StylesPanel.tsx';
+import TokensConsole from '../components/inspector/TokensConsole.tsx';
 
 interface Props {
   title?: string;
@@ -38,5 +40,12 @@ const {
       </main>
       <Footer />
     </div>
+
+    <!-- Design Inspector -->
+    <StylesPanel client:load />
+    <TokensConsole client:load />
+    <script>
+      import '../scripts/inspector';
+    </script>
   </body>
 </html>

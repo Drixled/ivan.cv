@@ -23,12 +23,12 @@ const codeExample = `function greet(name: string) {
 }`;
 
 const sections = [
+  { id: 'inspector', label: 'Inspector' },
   { id: 'typography', label: 'Typography' },
   { id: 'fonts', label: 'Fonts' },
   { id: 'colors', label: 'Colors' },
   { id: 'spacing', label: 'Spacing' },
   { id: 'buttons', label: 'Buttons' },
-  { id: 'cards', label: 'Cards' },
   { id: 'project-card', label: 'Project Card' },
   { id: 'code', label: 'Code' },
   { id: 'selection', label: 'Selection' },
@@ -54,6 +54,288 @@ const sections = [
     </header>
 
     <div class="space-y-8">
+      <!-- Inspector UI -->
+      <section id="inspector" class="bg-card rounded-lg p-6">
+        <h2 class="text-lg font-medium text-text-primary mb-6">Design Inspector UI</h2>
+        <p class="text-text-secondary text-sm mb-6">Styles panel and tokens console components.</p>
+
+        <div class="flex gap-6 flex-wrap">
+          <!-- Styles Panel Mock -->
+          <div class="styles-panel-preview">
+            <div class="panel-header">
+              <span class="panel-title">
+                Styles: <span class="element-tag">h1</span>
+              </span>
+              <button class="panel-close">×</button>
+            </div>
+            <div class="panel-content">
+              <div class="style-row">
+                <span class="style-prop">color</span>
+                <div class="color-row">
+                  <input type="color" class="style-color" value="#a6aba4" />
+                  <input type="text" class="style-input" value="#a6aba4" />
+                </div>
+              </div>
+              <div class="style-row">
+                <span class="style-prop">font-size</span>
+                <input type="text" class="style-input" value="72px" />
+              </div>
+              <div class="style-row">
+                <span class="style-prop">font-weight</span>
+                <input type="range" class="style-slider" min="100" max="900" value="400" />
+                <span class="style-value">400</span>
+              </div>
+              <div class="style-row">
+                <span class="style-prop">line-height</span>
+                <input type="text" class="style-input" value="1.15" />
+              </div>
+              <div class="style-row">
+                <span class="style-prop">letter-spacing</span>
+                <input type="text" class="style-input" value="0px" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Tokens Console Mock -->
+          <div class="tokens-console-preview">
+            <div class="console-header">
+              <div class="console-tabs">
+                <span class="console-tab active">Tokens API</span>
+              </div>
+              <div class="build-status">
+                <div class="build-dot"></div>
+                <span>Ready</span>
+              </div>
+            </div>
+            <div class="console-body">
+              <div class="console-line">
+                <span class="time">12:34:56</span>
+                <span class="method patch">PATCH</span>
+                <span class="endpoint">/tokens/<span class="token">hero.title</span>.color</span>
+                <span class="value">#ff5500</span>
+              </div>
+              <div class="console-line">
+                <span class="time">12:34:58</span>
+                <span class="method patch">PATCH</span>
+                <span class="endpoint">/tokens/<span class="token">hero.title</span>.fontSize</span>
+                <span class="value">80px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style>
+        /* Styles Panel Preview */
+        .styles-panel-preview {
+          width: 280px;
+          background: #111;
+          border: 1px solid #222;
+          border-radius: 8px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+          overflow: hidden;
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+        }
+
+        .styles-panel-preview .panel-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.6rem 0.8rem;
+          background: #0d0d0d;
+          border-bottom: 1px solid #1a1a1a;
+        }
+
+        .styles-panel-preview .panel-title {
+          font-size: 0.7rem;
+          color: #888;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .styles-panel-preview .element-tag {
+          color: #d7ba7d;
+        }
+
+        .styles-panel-preview .panel-close {
+          background: none;
+          border: none;
+          color: #555;
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+          padding: 0;
+        }
+
+        .styles-panel-preview .panel-content {
+          padding: 0.8rem;
+        }
+
+        .styles-panel-preview .style-row {
+          display: flex;
+          align-items: center;
+          margin-bottom: 0.6rem;
+          gap: 0.5rem;
+        }
+
+        .styles-panel-preview .style-row:last-child {
+          margin-bottom: 0;
+        }
+
+        .styles-panel-preview .style-prop {
+          color: #9cdcfe;
+          font-size: 0.7rem;
+          width: 75px;
+          flex-shrink: 0;
+        }
+
+        .styles-panel-preview .style-input {
+          flex: 1;
+          background: #0a0a0a;
+          border: 1px solid #222;
+          border-radius: 3px;
+          padding: 0.4rem 0.5rem;
+          color: #ce9178;
+          font-family: inherit;
+          font-size: 0.7rem;
+          outline: none;
+        }
+
+        .styles-panel-preview .color-row {
+          display: flex;
+          gap: 0.4rem;
+          flex: 1;
+        }
+
+        .styles-panel-preview .style-color {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 28px;
+          height: 28px;
+          border: 1px solid #222;
+          border-radius: 3px;
+          background: transparent;
+          cursor: pointer;
+          padding: 0;
+        }
+
+        .styles-panel-preview .style-color::-webkit-color-swatch-wrapper {
+          padding: 3px;
+        }
+
+        .styles-panel-preview .style-color::-webkit-color-swatch {
+          border-radius: 2px;
+          border: none;
+        }
+
+        .styles-panel-preview .style-slider {
+          flex: 1;
+          -webkit-appearance: none;
+          appearance: none;
+          height: 4px;
+          background: #222;
+          border-radius: 2px;
+          cursor: pointer;
+        }
+
+        .styles-panel-preview .style-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 14px;
+          height: 14px;
+          background: #e8e8e8;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        .styles-panel-preview .style-value {
+          color: #ce9178;
+          font-size: 0.7rem;
+          min-width: 28px;
+          text-align: right;
+        }
+
+        /* Tokens Console Preview */
+        .tokens-console-preview {
+          width: 320px;
+          background: #0d0d0d;
+          border: 1px solid #1a1a1a;
+          border-radius: 6px;
+          font-family: 'JetBrains Mono', ui-monospace, monospace;
+          font-size: 0.65rem;
+          overflow: hidden;
+        }
+
+        .tokens-console-preview .console-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.4rem 0.6rem;
+          background: #111;
+          border-bottom: 1px solid #1a1a1a;
+          color: #555;
+        }
+
+        .tokens-console-preview .console-tab.active {
+          color: #888;
+        }
+
+        .tokens-console-preview .build-status {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+
+        .tokens-console-preview .build-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #4caf50;
+        }
+
+        .tokens-console-preview .console-body {
+          padding: 0.5rem 0;
+        }
+
+        .tokens-console-preview .console-line {
+          padding: 0.2rem 0.6rem;
+          display: flex;
+          gap: 0.6rem;
+        }
+
+        .tokens-console-preview .time {
+          color: #333;
+          flex-shrink: 0;
+        }
+
+        .tokens-console-preview .method {
+          flex-shrink: 0;
+          padding: 0.1rem 0.3rem;
+          border-radius: 2px;
+          font-size: 0.6rem;
+        }
+
+        .tokens-console-preview .method.patch {
+          background: #3a3a1a;
+          color: #f9a825;
+        }
+
+        .tokens-console-preview .endpoint {
+          color: #888;
+        }
+
+        .tokens-console-preview .token {
+          color: #9cdcfe;
+        }
+
+        .tokens-console-preview .value {
+          color: #ce9178;
+          margin-left: auto;
+          flex-shrink: 0;
+        }
+      </style>
+
       <!-- Typography -->
       <section id="typography" class="bg-card rounded-lg p-6">
         <h2 class="text-lg font-medium text-text-primary mb-6">Typography</h2>
@@ -208,26 +490,9 @@ const sections = [
         </div>
       </section>
 
-      <!-- Cards -->
-      <section id="cards" class="bg-card rounded-lg p-6">
-        <h2 class="text-lg font-medium text-text-primary mb-6">Cards</h2>
-
-        <div class="space-y-4">
-          <div class="bg-background rounded-lg p-4 hover:bg-background/80 transition-colors cursor-pointer border border-text-secondary/10">
-            <div class="aspect-video bg-card rounded-md mb-4 flex items-center justify-center">
-              <span class="text-text-secondary text-sm">Image Placeholder</span>
-            </div>
-            <h3 class="text-text-primary font-medium mb-1">Card Title</h3>
-            <p class="text-text-secondary text-sm">Company &middot; 2024</p>
-            <p class="text-text-secondary text-sm">Role description goes here</p>
-          </div>
-          <p class="text-sm text-text-secondary opacity-60">bg-card rounded-lg p-4 hover:bg-card/80 transition-colors</p>
-        </div>
-      </section>
-
-      <!-- Project Card (New Design) -->
+      <!-- Project Card -->
       <section id="project-card" class="bg-card rounded-lg p-6">
-        <h2 class="text-lg font-medium text-text-primary mb-6">Project Card (New)</h2>
+        <h2 class="text-lg font-medium text-text-primary mb-6">Project Card</h2>
 
         <div class="max-w-[500px]">
           <ProjectCardNew
