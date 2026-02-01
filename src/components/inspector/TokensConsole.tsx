@@ -1,6 +1,6 @@
 import { useSignal } from '@preact/signals';
 import { useEffect, useRef } from 'preact/hooks';
-import { tokenChanges, syncStatus } from '../../lib/inspector/store';
+import { tokenChanges, syncStatus, selectedElement } from '../../lib/inspector/store';
 
 export default function TokensConsole() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -15,7 +15,8 @@ export default function TokensConsole() {
 
   const status = syncStatus.value;
 
-  if (!isVisible.value) return null;
+  // Only show when design mode is active (element selected)
+  if (!selectedElement.value || !isVisible.value) return null;
 
   return (
     <div class="tokens-console">
@@ -30,7 +31,7 @@ export default function TokensConsole() {
           border-radius: 8px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
           font-family: 'JetBrains Mono', ui-monospace, monospace;
-          font-size: 0.65rem;
+          font-size: 0.7rem;
           overflow: hidden;
           z-index: 9997;
         }
@@ -123,17 +124,12 @@ export default function TokensConsole() {
           flex-shrink: 0;
           padding: 0.1rem 0.3rem;
           border-radius: 2px;
-          font-size: 0.6rem;
+          font-size: 0.7rem;
         }
 
         .tokens-console .console-line .method.patch {
           background: #3a3a1a;
           color: #f9a825;
-        }
-
-        .tokens-console .console-line .method.sync {
-          background: #1a2a3a;
-          color: #4a9eff;
         }
 
         .tokens-console .console-line .endpoint {

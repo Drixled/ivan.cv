@@ -5,28 +5,22 @@ import { updateElementStyle } from '../../lib/inspector/storage';
 
 export default function StylesPanel() {
   const panelRef = useRef<HTMLDivElement>(null);
-  const isDragging = useSignal(false);
-  const dragOffset = useSignal({ x: 0, y: 0 });
-  const position = useSignal({ x: 100, y: 100 });
+
+  // Get current element info directly from signal
+  const currentElement = selectedElement.value?.element;
+  const currentTagName = selectedElement.value?.tagName ?? '';
 
   // Current style values
   const color = useSignal('#e8e8e8');
-  const fontSize = useSignal('16');
   const fontWeight = useSignal('400');
   const lineHeight = useSignal('1.2');
   const letterSpacing = useSignal('0');
 
-  // Get current element info directly from signal
-  const currentElement = selectedElement.value?.element;
-  const currentElementId = selectedElement.value?.elementId ?? '';
-  const currentTagName = selectedElement.value?.tagName ?? '';
-
-  // Update values when element changes
+  // Update style values when element changes
   useEffect(() => {
     if (currentElement) {
       const computed = window.getComputedStyle(currentElement);
       color.value = rgbToHex(computed.color);
-      fontSize.value = parseInt(computed.fontSize).toString();
       fontWeight.value = computed.fontWeight;
       lineHeight.value = parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)
         ? (parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)).toFixed(2)
@@ -34,26 +28,6 @@ export default function StylesPanel() {
       letterSpacing.value = computed.letterSpacing === 'normal'
         ? '0'
         : parseFloat(computed.letterSpacing).toFixed(2);
-
-      // Position panel near element
-      const rect = selectedElement.value!.rect;
-      const panelWidth = 280;
-      const panelHeight = 320;
-
-      let x = rect.right + 16;
-      let y = rect.top;
-
-      // Keep panel in viewport
-      if (x + panelWidth > window.innerWidth - 16) {
-        x = rect.left - panelWidth - 16;
-      }
-      if (x < 16) x = 16;
-      if (y + panelHeight > window.innerHeight - 16) {
-        y = window.innerHeight - panelHeight - 16;
-      }
-      if (y < 16) y = 16;
-
-      position.value = { x, y };
     }
   }, [currentElement]);
 
@@ -71,39 +45,6 @@ export default function StylesPanel() {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Dragging handlers
-  function handleMouseDown(e: MouseEvent) {
-    if ((e.target as HTMLElement).closest('.panel-header')) {
-      isDragging.value = true;
-      dragOffset.value = {
-        x: e.clientX - position.value.x,
-        y: e.clientY - position.value.y,
-      };
-    }
-  }
-
-  useEffect(() => {
-    function handleMouseMove(e: MouseEvent) {
-      if (isDragging.value) {
-        position.value = {
-          x: e.clientX - dragOffset.value.x,
-          y: e.clientY - dragOffset.value.y,
-        };
-      }
-    }
-
-    function handleMouseUp() {
-      isDragging.value = false;
-    }
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
   }, []);
 
   function applyStyle(property: string, value: string) {
@@ -128,21 +69,14 @@ export default function StylesPanel() {
   if (!currentElement) return null;
 
   return (
-    <div
-      ref={panelRef}
-      class="styles-panel"
-      style={{ left: `${position.value.x}px`, top: `${position.value.y}px` }}
-      onMouseDown={handleMouseDown}
-    >
+    <div ref={panelRef} class="styles-panel">
       <style>{`
         .styles-panel {
-          position: fixed;
-          width: 280px;
+          width: 100%;
           background: #111;
           border: 1px solid #222;
           border-radius: 8px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-          z-index: 9999;
           overflow: hidden;
           font-family: 'JetBrains Mono', ui-monospace, monospace;
         }
@@ -154,7 +88,6 @@ export default function StylesPanel() {
           padding: 0.6rem 0.8rem;
           background: #0d0d0d;
           border-bottom: 1px solid #1a1a1a;
-          cursor: move;
         }
 
         .styles-panel .panel-title {
@@ -324,24 +257,6 @@ export default function StylesPanel() {
               }}
             />
           </div>
-        </div>
-
-        {/* Font Size */}
-        <div class="style-row">
-          <span class="style-prop">font-size</span>
-          <input
-            type="text"
-            class="style-input"
-            value={`${fontSize.value}px`}
-            onInput={(e) => {
-              const val = (e.target as HTMLInputElement).value;
-              const num = parseInt(val);
-              if (!isNaN(num) && num > 0) {
-                fontSize.value = num.toString();
-                applyStyle('font-size', `${num}px`);
-              }
-            }}
-          />
         </div>
 
         {/* Font Weight */}
