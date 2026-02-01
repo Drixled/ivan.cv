@@ -1,8 +1,10 @@
+import { useSignal } from '@preact/signals';
 import { useEffect, useRef } from 'preact/hooks';
 import { tokenChanges, syncStatus } from '../../lib/inspector/store';
 
 export default function TokensConsole() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const isVisible = useSignal(true);
 
   // Auto-scroll on new entries
   useEffect(() => {
@@ -13,10 +15,7 @@ export default function TokensConsole() {
 
   const status = syncStatus.value;
 
-  function getTime() {
-    const now = new Date();
-    return now.toTimeString().split(' ')[0];
-  }
+  if (!isVisible.value) return null;
 
   return (
     <div class="tokens-console">
@@ -26,9 +25,10 @@ export default function TokensConsole() {
           bottom: 1.5rem;
           left: 1.5rem;
           width: 320px;
-          background: #0d0d0d;
-          border: 1px solid #1a1a1a;
-          border-radius: 6px;
+          background: #111;
+          border: 1px solid #222;
+          border-radius: 8px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
           font-family: 'JetBrains Mono', ui-monospace, monospace;
           font-size: 0.65rem;
           overflow: hidden;
@@ -39,35 +39,29 @@ export default function TokensConsole() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0.4rem 0.6rem;
-          background: #111;
+          padding: 0.6rem 0.8rem;
+          background: #0d0d0d;
           border-bottom: 1px solid #1a1a1a;
-          color: #555;
         }
 
-        .tokens-console .console-tabs {
-          display: flex;
-          gap: 0.8rem;
-        }
-
-        .tokens-console .console-tab {
-          color: #444;
-          cursor: pointer;
-          transition: color 0.15s ease;
-        }
-
-        .tokens-console .console-tab:hover {
-          color: #666;
-        }
-
-        .tokens-console .console-tab.active {
+        .tokens-console .console-title {
           color: #888;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .tokens-console .console-right {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
         }
 
         .tokens-console .build-status {
           display: flex;
           align-items: center;
           gap: 0.4rem;
+          color: #555;
         }
 
         .tokens-console .build-dot {
@@ -80,6 +74,21 @@ export default function TokensConsole() {
         .tokens-console .build-dot.building {
           background: #f9a825;
           animation: pulse 0.5s ease infinite;
+        }
+
+        .tokens-console .console-close {
+          background: none;
+          border: none;
+          color: #555;
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+          padding: 0;
+          transition: color 0.15s ease;
+        }
+
+        .tokens-console .console-close:hover {
+          color: #e8e8e8;
         }
 
         @keyframes pulse {
@@ -150,16 +159,17 @@ export default function TokensConsole() {
 
       {/* Header */}
       <div class="console-header">
-        <div class="console-tabs">
-          <span class="console-tab active">Tokens API</span>
-        </div>
-        <div class="build-status">
-          <div class={`build-dot ${status === 'syncing' ? 'building' : ''}`} />
-          <span>
-            {status === 'idle' && 'Ready'}
-            {status === 'syncing' && 'Syncing...'}
-            {status === 'synced' && 'Synced'}
-          </span>
+        <span class="console-title">Tokens API</span>
+        <div class="console-right">
+          <div class="build-status">
+            <div class={`build-dot ${status === 'syncing' ? 'building' : ''}`} />
+            <span>
+              {status === 'idle' && 'Ready'}
+              {status === 'syncing' && 'Syncing...'}
+              {status === 'synced' && 'Synced'}
+            </span>
+          </div>
+          <button class="console-close" onClick={() => isVisible.value = false}>×</button>
         </div>
       </div>
 

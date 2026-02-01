@@ -99,12 +99,13 @@ const sections = [
           <!-- Tokens Console Mock -->
           <div class="tokens-console-preview">
             <div class="console-header">
-              <div class="console-tabs">
-                <span class="console-tab active">Tokens API</span>
-              </div>
-              <div class="build-status">
-                <div class="build-dot"></div>
-                <span>Ready</span>
+              <span class="console-title">Tokens API</span>
+              <div class="console-right">
+                <div class="build-status">
+                  <div class="build-dot"></div>
+                  <span>Ready</span>
+                </div>
+                <button class="console-close">×</button>
               </div>
             </div>
             <div class="console-body">
@@ -259,9 +260,10 @@ const sections = [
         /* Tokens Console Preview */
         .tokens-console-preview {
           width: 320px;
-          background: #0d0d0d;
-          border: 1px solid #1a1a1a;
-          border-radius: 6px;
+          background: #111;
+          border: 1px solid #222;
+          border-radius: 8px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
           font-family: 'JetBrains Mono', ui-monospace, monospace;
           font-size: 0.65rem;
           overflow: hidden;
@@ -271,20 +273,26 @@ const sections = [
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0.4rem 0.6rem;
-          background: #111;
+          padding: 0.6rem 0.8rem;
+          background: #0d0d0d;
           border-bottom: 1px solid #1a1a1a;
-          color: #555;
         }
 
-        .tokens-console-preview .console-tab.active {
+        .tokens-console-preview .console-title {
           color: #888;
+        }
+
+        .tokens-console-preview .console-right {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
         }
 
         .tokens-console-preview .build-status {
           display: flex;
           align-items: center;
           gap: 0.4rem;
+          color: #555;
         }
 
         .tokens-console-preview .build-dot {
@@ -292,6 +300,16 @@ const sections = [
           height: 6px;
           border-radius: 50%;
           background: #4caf50;
+        }
+
+        .tokens-console-preview .console-close {
+          background: none;
+          border: none;
+          color: #555;
+          cursor: pointer;
+          font-size: 1rem;
+          line-height: 1;
+          padding: 0;
         }
 
         .tokens-console-preview .console-body {
