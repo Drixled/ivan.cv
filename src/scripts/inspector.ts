@@ -34,6 +34,7 @@ function createOverlay(): void {
     font-size: 0.65rem;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
     white-space: nowrap;
+    text-transform: uppercase;
   `;
   overlay.appendChild(tagLabel);
 
