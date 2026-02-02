@@ -1,10 +1,97 @@
 @import "tailwindcss";
 
+/* PP Editorial Old - Thin */
 @font-face {
   font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Ultralight.otf") format("opentype");
+  src: url("/fonts/PPEditorialOld-Thin.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Thin.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-ThinItalic.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-ThinItalic.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* PP Editorial Old - Ultralight */
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Ultralight.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Ultralight.woff") format("woff");
   font-weight: 200;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-UltralightItalic.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-UltralightItalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* PP Editorial Old - Regular */
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Regular.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Italic.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* PP Editorial Old - Bold */
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Bold.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-BoldItalic.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-BoldItalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* PP Editorial Old - Heavy */
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-Heavy.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-Heavy.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Editorial Old";
+  src: url("/fonts/PPEditorialOld-HeavyItalic.woff2") format("woff2"),
+       url("/fonts/PPEditorialOld-HeavyItalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -15,7 +102,7 @@
   --color-text-secondary: #6B7468;
 
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "PP Editorial Old", ui-serif, Georgia, serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
 }
 
 html {
