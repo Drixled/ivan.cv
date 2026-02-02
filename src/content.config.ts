@@ -10,6 +10,9 @@ const projects = defineCollection({
     company: z.string(),
     period: z.string(),
     role: z.string(),
+    responsibilities: z.array(z.string()).optional(),
+    context: z.string().optional(),
+    myJob: z.string().optional(),
     order: z.number().default(0),
   }),
 });
