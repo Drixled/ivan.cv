@@ -79,10 +79,24 @@ const { frontmatter, slug } = Astro.props;
 </BaseLayout>
 
 <style>
+  .project-content :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 2rem;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+
   .project-content :global(img) {
     border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: zoom-in;
+  }
+
+  .project-content :global(video) {
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 </style>
 

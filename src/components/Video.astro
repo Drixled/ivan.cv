@@ -1,0 +1,44 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+  autoplay?: boolean;
+  loop?: boolean;
+  muted?: boolean;
+  controls?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  poster,
+  autoplay = true,
+  loop = true,
+  muted = true,
+  controls = false,
+  class: className,
+} = Astro.props;
+
+const isWebm = src.endsWith('.webm');
+const type = isWebm ? 'video/webm' : 'video/mp4';
+---
+
+<video
+  class:list={["video", className]}
+  autoplay={autoplay}
+  loop={loop}
+  muted={muted}
+  controls={controls}
+  playsinline
+  poster={poster}
+>
+  <source src={src} type={type} />
+</video>
+
+<style>
+  .video {
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+</style>
