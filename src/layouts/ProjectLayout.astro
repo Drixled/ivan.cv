@@ -24,8 +24,11 @@ const { frontmatter, slug } = Astro.props;
       &larr; Back
     </a>
 
-    <header class="mb-12 text-center">
-      <h1 class="text-7xl font-display text-text-primary mb-4 leading-[1.1]">
+    <header class="mb-12">
+      <h1
+        class="text-7xl font-display font-light text-text-primary mb-4 leading-[1.15]"
+        style="font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 1;"
+      >
         {frontmatter.title}
       </h1>
       <p class="text-text-secondary">
@@ -34,8 +37,30 @@ const { frontmatter, slug } = Astro.props;
       <p class="text-text-secondary">{frontmatter.role}</p>
     </header>
 
-    <div class="prose prose-invert prose-sm max-w-none">
+    <div class="prose prose-invert prose-sm max-w-none project-content">
       <slot />
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .project-content :global(img) {
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: zoom-in;
+  }
+</style>
+
+<script>
+  import mediumZoom from 'medium-zoom';
+
+  function initZoom() {
+    mediumZoom('.project-content img', {
+      background: 'rgba(0, 0, 0, 0.9)',
+      margin: 24,
+    });
+  }
+
+  initZoom();
+  document.addEventListener('astro:after-swap', initZoom);
+</script>
