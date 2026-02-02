@@ -1,9 +1,12 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface Props {
   title: string;
   role: string;
   period: string;
-  thumbnail?: string;
+  thumbnail?: ImageMetadata;
   slug?: string;
   bento?: boolean;
 }
@@ -17,9 +20,14 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
     <div class:list={["relative bg-background rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "h-[338px]"]}>
       <!-- Image -->
       {thumbnail ? (
-        <img
+        <Image
           src={thumbnail}
           alt={title}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          format="webp"
+          quality={85}
+          loading="lazy"
           class:list={[
             "absolute top-0 left-0 right-0 z-10 w-full object-cover rounded-2xl transition-all duration-300",
             bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"

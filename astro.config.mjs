@@ -8,9 +8,23 @@ import preact from '@astrojs/preact';
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
+  output: 'static',
+
+  image: {
+    // Use sharp for image optimization (WebP, AVIF, responsive sizes)
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
   },
 
-  integrations: [mdx(), preact()]
+  prefetch: {
+    defaultStrategy: 'hover',
+    prefetchAll: false,
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
+  integrations: [mdx(), preact()],
 });
