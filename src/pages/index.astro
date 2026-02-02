@@ -7,9 +7,9 @@ import { getCollection } from 'astro:content';
 const projects = await getCollection('projects');
 const projectMap = Object.fromEntries(projects.map(p => [p.id, p]));
 
-// Manual order: neurelo, demiura, rever, mediwallet
+// Manual order: neurelo, mictlan, rever, mediwallet
 const neurelo = projectMap['neurelo'];
-const demiura = projectMap['demiura'];
+const mictlan = projectMap['mictlan'];
 const rever = projectMap['rever'];
 const mediwallet = projectMap['mediwallet'];
 ---
@@ -21,7 +21,7 @@ const mediwallet = projectMap['mediwallet'];
       <Hero />
     </div>
 
-    <!-- Row 2: Neurelo (bigger) + Demiura (smaller) -->
+    <!-- Row 2: Neurelo (7-col) + Mictlán (5-col) -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
       {neurelo && (
         <div class="md:col-span-7 h-[400px]">
@@ -36,21 +36,21 @@ const mediwallet = projectMap['mediwallet'];
         </div>
       )}
 
-      {demiura && (
+      {mictlan && (
         <div class="md:col-span-5 h-[400px]">
           <ProjectCardNew
-            title={demiura.data.title}
-            role={demiura.data.role}
-            period={demiura.data.period}
-            thumbnail={demiura.data.thumbnail}
-            slug={demiura.id}
+            title={mictlan.data.title}
+            role={mictlan.data.role}
+            period={mictlan.data.period}
+            thumbnail={mictlan.data.thumbnail}
+            slug={mictlan.id}
             bento={true}
           />
         </div>
       )}
     </div>
 
-    <!-- Row 3: Rever (smaller) + Mediwallet (bigger) -->
+    <!-- Row 3: Rever (5-col) + Mediwallet (7-col) -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4">
       {rever && (
         <div class="md:col-span-5 h-[400px]">
