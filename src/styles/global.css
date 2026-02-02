@@ -137,3 +137,100 @@ body {
 .animate-slow-spin {
     animation: slow-spin 60s linear infinite;
 }
+
+/* Inspector Demo */
+.demo-cursor {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    transition:
+        left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.demo-cursor.visible {
+    opacity: 1;
+}
+
+.demo-cursor svg {
+    width: 100%;
+    height: 100%;
+}
+
+.demo-label {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-family: ui-monospace, 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.375rem 0.625rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition:
+        left 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.2s ease;
+}
+
+.demo-label.visible {
+    opacity: 1;
+}
+
+.demo-replay-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    opacity: 0;
+    transition:
+        opacity 0.3s ease,
+        background 0.15s ease,
+        color 0.15s ease,
+        transform 0.15s ease;
+    z-index: 50;
+}
+
+.demo-replay-btn.visible {
+    opacity: 1;
+}
+
+.demo-replay-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+}
+
+.demo-replay-btn:active {
+    transform: scale(0.95);
+}
+
+/* Staggered fade-in animation */
+.fade-stagger {
+    opacity: 0;
+    transform: translateY(6px);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    will-change: opacity, transform;
+}
+
+.fade-stagger.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
