@@ -1,7 +1,10 @@
-import { useSignal } from '@preact/signals';
-import { useEffect, useRef } from 'preact/hooks';
-import { selectedElement, clearSelection } from '../../lib/inspector/store';
-import { updateElementStyle, clearElementStyles } from '../../lib/inspector/storage';
+import { useSignal } from "@preact/signals";
+import { useEffect, useRef } from "preact/hooks";
+import { selectedElement, clearSelection } from "../../lib/inspector/store";
+import {
+  updateElementStyle,
+  clearElementStyles,
+} from "../../lib/inspector/storage";
 
 interface StylesPanelProps {
   preview?: boolean;
@@ -12,7 +15,9 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
   // Get current element info directly from signal
   const currentElement = preview ? null : selectedElement.value?.element;
-  const currentTagName = preview ? 'h1' : (selectedElement.value?.tagName ?? '');
+  const currentTagName = preview
+    ? "h1"
+    : (selectedElement.value?.tagName ?? "");
   const elementRect = preview ? null : selectedElement.value?.rect;
 
   // Calculate initial position to the right of the element
@@ -27,14 +32,14 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
   const dragOffset = useSignal({ x: 0, y: 0 });
 
   // Current style values
-  const color = useSignal('#e8e8e8');
-  const fontWeight = useSignal('400');
-  const lineHeight = useSignal('1.2');
-  const letterSpacing = useSignal('0');
-  const slant = useSignal('0');
-  const opticalSize = useSignal('16');
-  const softness = useSignal('0');
-  const wonk = useSignal('0');
+  const color = useSignal("#e8e8e8");
+  const fontWeight = useSignal("300");
+  const lineHeight = useSignal("1.2");
+  const letterSpacing = useSignal("0");
+  const slant = useSignal("0");
+  const opticalSize = useSignal("16");
+  const softness = useSignal("0");
+  const wonk = useSignal("0");
   const isVariableFont = useSignal(false);
 
   // Original style values (before any modifications)
@@ -59,11 +64,11 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       const inlineLetterSpacing = currentElement.style.letterSpacing;
       const inlineFontStyle = currentElement.style.fontStyle;
 
-      currentElement.style.color = '';
-      currentElement.style.fontWeight = '';
-      currentElement.style.lineHeight = '';
-      currentElement.style.letterSpacing = '';
-      currentElement.style.fontStyle = '';
+      currentElement.style.color = "";
+      currentElement.style.fontWeight = "";
+      currentElement.style.lineHeight = "";
+      currentElement.style.letterSpacing = "";
+      currentElement.style.fontStyle = "";
 
       const computed = window.getComputedStyle(currentElement);
       const origFontSize = parseFloat(computed.fontSize);
@@ -72,30 +77,36 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       // Compute original variable font axis values
       let origOpticalSize: string;
       let origWonk: string;
-      if (origTagName === 'h1' && origFontSize >= 48) {
-        origOpticalSize = '72';
-        origWonk = '1';
-      } else if (origTagName === 'h2' && origFontSize >= 16) {
-        origOpticalSize = '24';
-        origWonk = '0';
+      if (origTagName === "h1" && origFontSize >= 48) {
+        origOpticalSize = "72";
+        origWonk = "1";
+      } else if (origTagName === "h2" && origFontSize >= 16) {
+        origOpticalSize = "24";
+        origWonk = "0";
       } else {
-        origOpticalSize = String(Math.min(144, Math.max(9, Math.round(origFontSize))));
-        origWonk = '0';
+        origOpticalSize = String(
+          Math.min(144, Math.max(9, Math.round(origFontSize))),
+        );
+        origWonk = "0";
       }
 
       // Store original values
       originalStyles.current = {
         color: rgbToHex(computed.color),
         fontWeight: computed.fontWeight,
-        lineHeight: parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)
-          ? (parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)).toFixed(2)
-          : '1.2',
-        letterSpacing: computed.letterSpacing === 'normal'
-          ? '0'
-          : parseFloat(computed.letterSpacing).toFixed(2),
-        slant: computed.fontStyle === 'italic' ? '1' : '0',
+        lineHeight:
+          parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)
+            ? (
+                parseFloat(computed.lineHeight) / parseFloat(computed.fontSize)
+              ).toFixed(2)
+            : "1.2",
+        letterSpacing:
+          computed.letterSpacing === "normal"
+            ? "0"
+            : parseFloat(computed.letterSpacing).toFixed(2),
+        slant: computed.fontStyle === "italic" ? "1" : "0",
         opticalSize: origOpticalSize,
-        softness: '0',
+        softness: "0",
         wonk: origWonk,
       };
 
@@ -110,29 +121,37 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       const currentComputed = window.getComputedStyle(currentElement);
       color.value = rgbToHex(currentComputed.color);
       fontWeight.value = currentComputed.fontWeight;
-      lineHeight.value = parseFloat(currentComputed.lineHeight) / parseFloat(currentComputed.fontSize)
-        ? (parseFloat(currentComputed.lineHeight) / parseFloat(currentComputed.fontSize)).toFixed(2)
-        : '1.2';
-      letterSpacing.value = currentComputed.letterSpacing === 'normal'
-        ? '0'
-        : parseFloat(currentComputed.letterSpacing).toFixed(2);
-      slant.value = currentComputed.fontStyle === 'italic' ? '1' : '0';
+      lineHeight.value =
+        parseFloat(currentComputed.lineHeight) /
+        parseFloat(currentComputed.fontSize)
+          ? (
+              parseFloat(currentComputed.lineHeight) /
+              parseFloat(currentComputed.fontSize)
+            ).toFixed(2)
+          : "1.2";
+      letterSpacing.value =
+        currentComputed.letterSpacing === "normal"
+          ? "0"
+          : parseFloat(currentComputed.letterSpacing).toFixed(2);
+      slant.value = currentComputed.fontStyle === "italic" ? "1" : "0";
 
       // Check if element uses Fraunces (variable font)
       const fontFamily = currentComputed.fontFamily.toLowerCase();
-      isVariableFont.value = fontFamily.includes('fraunces');
+      isVariableFont.value = fontFamily.includes("fraunces");
 
       // Set variable font axes defaults only for Fraunces
       if (isVariableFont.value) {
         const fontSize = parseFloat(currentComputed.fontSize);
         if (fontSize >= 48) {
-          opticalSize.value = '72';
-          wonk.value = '1';
+          opticalSize.value = "72";
+          wonk.value = "1";
         } else {
-          opticalSize.value = String(Math.min(144, Math.max(9, Math.round(fontSize))));
-          wonk.value = '0';
+          opticalSize.value = String(
+            Math.min(144, Math.max(9, Math.round(fontSize))),
+          );
+          wonk.value = "0";
         }
-        softness.value = '0';
+        softness.value = "0";
       }
 
       // Update position when element changes
@@ -145,7 +164,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
   // Dragging handlers
   function handleMouseDown(e: MouseEvent) {
-    if ((e.target as HTMLElement).closest('.panel-header')) {
+    if ((e.target as HTMLElement).closest(".panel-header")) {
       isDragging.value = true;
       dragOffset.value = {
         x: e.clientX - position.value.left,
@@ -168,11 +187,11 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       isDragging.value = false;
     }
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 
@@ -182,14 +201,14 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       if (
         panelRef.current &&
         !panelRef.current.contains(e.target as Node) &&
-        !(e.target as HTMLElement).closest('[data-inspectable]')
+        !(e.target as HTMLElement).closest("[data-inspectable]")
       ) {
         clearSelection();
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function applyStyle(property: string, value: string) {
@@ -208,7 +227,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
     const value = `'opsz' ${opticalSize.value}, 'SOFT' ${softness.value}, 'WONK' ${wonk.value}`;
     el.style.fontVariationSettings = value;
-    updateElementStyle(elId, 'font-variation-settings', value);
+    updateElementStyle(elId, "font-variation-settings", value);
   }
 
   function resetStyles() {
@@ -217,12 +236,12 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
     if (!el || !elId || !originalStyles.current) return;
 
     // Remove inline styles
-    el.style.color = '';
-    el.style.fontWeight = '';
-    el.style.lineHeight = '';
-    el.style.letterSpacing = '';
-    el.style.fontStyle = '';
-    el.style.fontVariationSettings = '';
+    el.style.color = "";
+    el.style.fontWeight = "";
+    el.style.lineHeight = "";
+    el.style.letterSpacing = "";
+    el.style.fontStyle = "";
+    el.style.fontVariationSettings = "";
 
     // Clear from storage
     clearElementStyles(elId);
@@ -243,17 +262,21 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
   return (
     <div
       ref={panelRef}
-      class={`styles-panel ${preview ? 'styles-panel--preview' : ''}`}
-      style={preview ? {} : { top: `${position.value.top}px`, left: `${position.value.left}px` }}
+      class={`styles-panel ${preview ? "styles-panel--preview" : ""}`}
+      style={
+        preview
+          ? {}
+          : { top: `${position.value.top}px`, left: `${position.value.left}px` }
+      }
       onMouseDown={preview ? undefined : handleMouseDown}
     >
       <style>{`
         .styles-panel {
           position: fixed;
           width: 280px;
-          background: #111;
-          border: 1px solid #222;
-          border-radius: 8px;
+          background: var(--color-card);
+          border: 1px solid var(--color-border);
+          border-radius: 16px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
           overflow: hidden;
           font-family: 'Hanken Grotesk', sans-serif;
@@ -268,9 +291,9 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0.6rem 0.8rem;
-          background: #0d0d0d;
-          border-bottom: 1px solid #1a1a1a;
+          padding: 0.75rem;
+          background: var(--color-background);
+          border-bottom: 1px solid var(--color-border);
           cursor: move;
         }
 
@@ -299,6 +322,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           display: flex;
           align-items: center;
           justify-content: center;
+          transform: translateY(-1px);
           transition: color 0.15s ease;
         }
 
@@ -307,7 +331,8 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         }
 
         .styles-panel .panel-content {
-          padding: 0.8rem;
+          padding: 0.5rem;
+          padding-bottom: 0;
         }
 
         .styles-panel .style-row {
@@ -330,8 +355,8 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
         .styles-panel .style-input {
           flex: 1;
-          background: #0a0a0a;
-          border: 1px solid #222;
+          background: var(--color-background);
+          border: 1px solid var(--color-border);
           border-radius: 3px;
           padding: 0.4rem 0.5rem;
           color: #ce9178;
@@ -402,8 +427,8 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         .styles-panel .style-slider::-webkit-slider-thumb {
           -webkit-appearance: none;
           appearance: none;
-          width: 10px;
-          height: 10px;
+          width: 14px;
+          height: 14px;
           background: #A6ABA4;
           border: none;
           border-radius: 50%;
@@ -493,15 +518,15 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         }
 
         .styles-panel .panel-footer {
-          padding: 0 0.8rem 0.8rem;
+          padding: 0 0.5rem 0.5rem;
         }
 
         .styles-panel .reset-btn {
           width: 100%;
-          padding: 0.5rem 0.75rem;
-          background: rgba(0, 0, 0, 0.2);
+          padding: 0.5rem;
+          background: var(--color-card-hover);
           border: none;
-          border-radius: 99px;
+          border-radius: 12px;
           color: #888;
           font-family: inherit;
           font-size: 0.8rem;
@@ -510,7 +535,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         }
 
         .styles-panel .reset-btn:hover {
-          background: rgba(0, 0, 0, 0.35);
+          background: #252525;
           color: #aaa;
         }
       `}</style>
@@ -520,7 +545,12 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         <span class="panel-title">
           Styles: <span class="element-tag">{currentTagName}</span>
         </span>
-        <button class="panel-close" onClick={preview ? undefined : () => clearSelection()}>×</button>
+        <button
+          class="panel-close"
+          onClick={preview ? undefined : () => clearSelection()}
+        >
+          ×
+        </button>
       </div>
 
       {/* Controls */}
@@ -529,18 +559,20 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         <div class="slider-wrapper">
           <span class="slider-label">Color</span>
           <div class="color-swatches">
-            {['#A6ABA4', '#6B7468', '#FFFFFF', '#FF5500', '#4a9eff'].map((swatchColor) => (
-              <button
-                key={swatchColor}
-                type="button"
-                class={`color-swatch ${color.value.toLowerCase() === swatchColor.toLowerCase() ? 'color-swatch--active' : ''}`}
-                style={{ backgroundColor: swatchColor }}
-                onClick={() => {
-                  color.value = swatchColor;
-                  applyStyle('color', swatchColor);
-                }}
-              />
-            ))}
+            {["#A6ABA4", "#6B7468", "#FFFFFF", "#FF5500", "#4a9eff"].map(
+              (swatchColor) => (
+                <button
+                  key={swatchColor}
+                  type="button"
+                  class={`color-swatch ${color.value.toLowerCase() === swatchColor.toLowerCase() ? "color-swatch--active" : ""}`}
+                  style={{ backgroundColor: swatchColor }}
+                  onClick={() => {
+                    color.value = swatchColor;
+                    applyStyle("color", swatchColor);
+                  }}
+                />
+              ),
+            )}
           </div>
         </div>
 
@@ -556,7 +588,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
             value={fontWeight.value}
             onInput={(e) => {
               fontWeight.value = (e.target as HTMLInputElement).value;
-              applyStyle('font-weight', fontWeight.value);
+              applyStyle("font-weight", fontWeight.value);
             }}
           />
           <span class="slider-value">{fontWeight.value}</span>
@@ -650,9 +682,9 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
               <span class="toggle-label">Wonk</span>
               <button
                 type="button"
-                class={`toggle-btn ${wonk.value === '1' ? 'toggle-btn--active' : ''}`}
+                class={`toggle-btn ${wonk.value === "1" ? "toggle-btn--active" : ""}`}
                 onClick={() => {
-                  wonk.value = wonk.value === '0' ? '1' : '0';
+                  wonk.value = wonk.value === "0" ? "1" : "0";
                   applyVariationSettings();
                 }}
               >
@@ -664,10 +696,13 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
             <span class="toggle-label">Italic</span>
             <button
               type="button"
-              class={`toggle-btn ${slant.value === '1' ? 'toggle-btn--active' : ''}`}
+              class={`toggle-btn ${slant.value === "1" ? "toggle-btn--active" : ""}`}
               onClick={() => {
-                slant.value = slant.value === '0' ? '1' : '0';
-                applyStyle('font-style', slant.value === '1' ? 'italic' : 'normal');
+                slant.value = slant.value === "0" ? "1" : "0";
+                applyStyle(
+                  "font-style",
+                  slant.value === "1" ? "italic" : "normal",
+                );
               }}
             >
               <span class="toggle-knob" />
@@ -688,10 +723,10 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
 function rgbToHex(rgb: string): string {
   const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-  if (!match) return rgb.startsWith('#') ? rgb : '#e8e8e8';
+  if (!match) return rgb.startsWith("#") ? rgb : "#e8e8e8";
 
-  const r = parseInt(match[1]).toString(16).padStart(2, '0');
-  const g = parseInt(match[2]).toString(16).padStart(2, '0');
-  const b = parseInt(match[3]).toString(16).padStart(2, '0');
+  const r = parseInt(match[1]).toString(16).padStart(2, "0");
+  const g = parseInt(match[2]).toString(16).padStart(2, "0");
+  const b = parseInt(match[3]).toString(16).padStart(2, "0");
   return `#${r}${g}${b}`;
 }

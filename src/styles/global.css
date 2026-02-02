@@ -1,214 +1,122 @@
 @import "tailwindcss";
 
-/* PP Editorial Old - Thin */
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Thin.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Thin.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-ThinItalic.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-ThinItalic.woff") format("woff");
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* PP Editorial Old - Ultralight */
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Ultralight.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Ultralight.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-UltralightItalic.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-UltralightItalic.woff") format("woff");
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* PP Editorial Old - Regular */
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Regular.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Italic.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Italic.woff") format("woff");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* PP Editorial Old - Bold */
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Bold.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Bold.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-BoldItalic.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-BoldItalic.woff") format("woff");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* PP Editorial Old - Heavy */
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-Heavy.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-Heavy.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "PP Editorial Old";
-  src: url("/fonts/PPEditorialOld-HeavyItalic.woff2") format("woff2"),
-       url("/fonts/PPEditorialOld-HeavyItalic.woff") format("woff");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
 @theme {
-  --color-background: #0c0c0c;
-  --color-card: #141414;
-  --color-text-primary: #A6ABA4;
-  --color-text-secondary: #6B7468;
+    --color-background: #0c0c0c;
+    --color-card: #141414;
+    --color-card-hover: #1b1b1b;
+    --color-border: rgba(255, 255, 255, 0.03);
+    --color-text-primary: #a6aba4;
+    --color-text-secondary: #6b7468;
 
-  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
+    --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Fraunces", ui-serif, Georgia, serif;
 }
 
 html {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
 }
 
 body {
-  font-family: var(--font-sans);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background-color: var(--color-text-secondary);
-  color: var(--color-background);
+    background-color: var(--color-text-secondary);
+    color: var(--color-background);
 }
 
 /* Prose styles for MDX content */
 .prose {
-  color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
 }
 
 .prose h2 {
-  color: var(--color-text-primary);
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+    color: var(--color-text-secondary);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
 }
 
 .prose h3 {
-  color: var(--color-text-primary);
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .prose p {
-  margin-bottom: 1rem;
-  line-height: 1.7;
+    margin-bottom: 1rem;
+    line-height: 1.7;
 }
 
-.prose ul, .prose ol {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
+.prose ul,
+.prose ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
 }
 
 .prose li {
-  margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .prose a {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
 }
 
 .prose a:hover {
-  color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
 }
 
 .prose img {
-  border-radius: 0.5rem;
-  margin: 1.5rem 0;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
 }
 
 .prose code {
-  background-color: var(--color-card);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
+    background-color: var(--color-card);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
 }
 
 .prose pre {
-  background-color: var(--color-card);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-  margin: 1.5rem 0;
+    background-color: var(--color-card);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
 }
 
 .prose pre code {
-  background: none;
-  padding: 0;
+    background: none;
+    padding: 0;
 }
 
 /* View transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 300ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Slow spin animation */
 @keyframes slow-spin {
-  from {
-    transform: translateX(-50%) rotate(0deg);
-  }
-  to {
-    transform: translateX(-50%) rotate(360deg);
-  }
+    from {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
 }
 
 .animate-slow-spin {
-  animation: slow-spin 60s linear infinite;
+    animation: slow-spin 60s linear infinite;
 }

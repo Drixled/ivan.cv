@@ -12,9 +12,9 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
 ---
 
 <a href={slug ? `/project/${slug}` : '#'} class:list={["group block", bento && "h-full"]} data-astro-prefetch="hover">
-  <div class:list={["bg-card p-2 rounded-3xl flex flex-col gap-3", bento && "h-full"]}>
+  <div class:list={["bg-card p-2 rounded-3xl flex flex-col gap-3 border border-white/[0.03]", bento && "h-full"]}>
     <!-- Thumbnail Container -->
-    <div class:list={["relative bg-white/[0.03] border border-white/[0.03] rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "h-[338px]"]}>
+    <div class:list={["relative bg-background rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "h-[338px]"]}>
       <!-- Image -->
       {thumbnail ? (
         <img
@@ -35,7 +35,7 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
       )}
 
       <!-- Role Badge -->
-      <div class="absolute bottom-0 left-0 right-0 px-2.5 py-1">
+      <div class="absolute bottom-0 left-0 right-0 px-2.5 pt-1 pb-2">
         <p class="text-xs uppercase tracking-[1.2px] font-mono gradient-text">
           {role}
         </p>
@@ -44,8 +44,8 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
 
     <!-- Meta -->
     <div class="relative flex items-end justify-between px-1 pb-1">
-      <div class="flex flex-col">
-        <h3 class="text-[32px] font-sans text-text-primary leading-8 tracking-tight">
+      <div class="flex flex-col gap-1">
+        <h3 class="text-[32px] font-display font-light text-text-primary leading-8 tracking-tight">
           {title}
         </h3>
         <p class="text-xs uppercase tracking-[1.2px] text-text-secondary/40 font-mono">
@@ -54,7 +54,7 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
       </div>
 
       <!-- Arrow Button -->
-      <div class="bg-[#1b1b1b] p-1 rounded-2xl group-hover:bg-[#252525] transition-colors">
+      <div class="bg-card-hover p-1 rounded-2xl group-hover:bg-[#252525] transition-colors">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-text-primary">
           <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
