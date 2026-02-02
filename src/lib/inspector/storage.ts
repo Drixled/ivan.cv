@@ -1,7 +1,6 @@
-import type { StoredStyles, TokenChange } from './types';
+import type { StoredStyles } from './types';
 
 const STORAGE_KEY = 'inspector-styles';
-const CHANGES_KEY = 'inspector-changes';
 
 export function loadStoredStyles(): StoredStyles {
   if (typeof window === 'undefined') return {};
@@ -36,23 +35,8 @@ export function updateElementStyle(
   return styles;
 }
 
-export function loadStoredChanges(): TokenChange[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const stored = localStorage.getItem(CHANGES_KEY);
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-}
-
-export function saveChanges(changes: TokenChange[]): void {
-  if (typeof window === 'undefined') return;
-  try {
-    // Keep only last 50 changes
-    const trimmed = changes.slice(-50);
-    localStorage.setItem(CHANGES_KEY, JSON.stringify(trimmed));
-  } catch {
-    console.error('Failed to save changes to localStorage');
-  }
+export function clearElementStyles(elementId: string): void {
+  const styles = loadStoredStyles();
+  delete styles[elementId];
+  saveStyles(styles);
 }

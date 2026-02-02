@@ -1,12 +1,3 @@
-export interface TokenChange {
-  id: string;
-  timestamp: number;
-  elementId: string;
-  property: string;
-  oldValue: string;
-  newValue: string;
-}
-
 export interface StoredStyles {
   [elementId: string]: {
     [property: string]: string;
@@ -19,5 +10,3 @@ export interface ElementInfo {
   tagName: string;
   rect: DOMRect;
 }
-
-export type SyncStatus = 'idle' | 'syncing' | 'synced';
