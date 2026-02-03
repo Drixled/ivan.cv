@@ -14,7 +14,7 @@ interface Props {
 const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
 ---
 
-<a href={slug ? `/project/${slug}` : '#'} class:list={["group block", bento && "h-full"]} data-astro-prefetch="hover">
+<a href={slug ? `/project/${slug}` : '#'} class:list={["group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl", bento && "h-full"]} data-astro-prefetch="hover">
   <div class:list={["bg-card p-2 rounded-3xl flex flex-col gap-3 border border-white/[0.03]", bento && "h-full"]}>
     <!-- Thumbnail Container -->
     <div class:list={["relative bg-background rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "h-[338px]"]}>
@@ -61,7 +61,7 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
 
       <!-- Arrow Button -->
       <div class="bg-card-hover p-1 rounded-2xl group-hover:bg-[#252525] transition-colors">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-text-primary">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-text-primary" aria-hidden="true">
           <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>

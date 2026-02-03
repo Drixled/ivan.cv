@@ -46,7 +46,7 @@ const sections = [
         {sections.map((section) => (
           <a
             href={`#${section.id}`}
-            class="text-sm px-3 py-1.5 bg-card rounded-md text-text-secondary hover:text-text-primary hover:bg-card/80 transition-colors"
+            class="text-sm px-3 py-1.5 bg-card rounded-md text-text-secondary hover:text-text-primary hover:bg-card/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             {section.label}
           </a>
@@ -185,10 +185,10 @@ const sections = [
           <div class="space-y-3">
             <p class="text-sm text-text-secondary">Primary</p>
             <div class="flex flex-wrap gap-4">
-              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium hover:bg-text-primary/90 transition-colors">
+              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium hover:bg-text-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 Primary Button
               </button>
-              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed">
+              <button class="bg-text-primary text-background px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed" disabled>
                 Disabled
               </button>
             </div>
@@ -198,10 +198,10 @@ const sections = [
           <div class="space-y-3">
             <p class="text-sm text-text-secondary">Secondary</p>
             <div class="flex flex-wrap gap-4">
-              <button class="border border-text-secondary text-text-primary px-4 py-2 rounded-lg font-medium hover:border-text-primary hover:bg-background transition-colors">
+              <button class="border border-text-secondary text-text-primary px-4 py-2 rounded-lg font-medium hover:border-text-primary hover:bg-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
                 Secondary Button
               </button>
-              <button class="border border-text-secondary text-text-secondary px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed">
+              <button class="border border-text-secondary text-text-secondary px-4 py-2 rounded-lg font-medium opacity-50 cursor-not-allowed" disabled>
                 Disabled
               </button>
             </div>
@@ -211,7 +211,7 @@ const sections = [
           <div class="space-y-3">
             <p class="text-sm text-text-secondary">Ghost</p>
             <div class="flex flex-wrap gap-4">
-              <button class="text-text-primary underline underline-offset-2 hover:text-text-secondary transition-colors">
+              <button class="text-text-primary underline underline-offset-2 hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
                 Ghost Button
               </button>
             </div>

@@ -12,7 +12,7 @@ const links = [
 <nav class="py-8 relative">
   <ShapesGlow />
   <div class="flex justify-between items-center relative">
-    <a href="/" class="text-sm text-text-primary hover:text-text-secondary transition-colors">
+    <a href="/" class="text-sm text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
       Iván Uruchurtu
     </a>
     <ul class="flex gap-6 text-sm">
@@ -21,7 +21,7 @@ const links = [
           <a
             href={link.href}
             class:list={[
-              "transition-colors hover:text-text-primary",
+              "transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm",
               currentPath === link.href ? "text-text-primary" : "text-text-secondary"
             ]}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}

@@ -332,6 +332,13 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           color: #e8e8e8;
         }
 
+        .styles-panel .panel-close:focus-visible {
+          outline: none;
+          color: #e8e8e8;
+          box-shadow: 0 0 0 2px #4a9eff;
+          border-radius: 4px;
+        }
+
         .styles-panel .panel-content {
           padding: 0.5rem;
           padding-bottom: 0;
@@ -400,6 +407,11 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           border-color: #fff;
         }
 
+        .styles-panel .color-swatch:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px #4a9eff;
+        }
+
         .styles-panel .slider-wrapper {
           display: flex;
           align-items: center;
@@ -440,6 +452,14 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
 
         .styles-panel .style-slider::-webkit-slider-thumb:hover {
           background: #c8cdc6;
+        }
+
+        .styles-panel .style-slider:focus-visible {
+          outline: none;
+        }
+
+        .styles-panel .style-slider:focus-visible::-webkit-slider-thumb {
+          box-shadow: 0 0 0 2px #4a9eff;
         }
 
         .styles-panel .slider-value {
@@ -512,6 +532,11 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           background: #111;
         }
 
+        .styles-panel .toggle-btn:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px #4a9eff;
+        }
+
         .styles-panel .style-value {
           color: #888;
           font-size: 0.8rem;
@@ -540,6 +565,11 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           background: #252525;
           color: #aaa;
         }
+
+        .styles-panel .reset-btn:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 2px #4a9eff;
+        }
       `}</style>
 
       {/* Header */}
@@ -550,6 +580,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         <button
           class="panel-close"
           onClick={preview ? undefined : () => clearSelection()}
+          aria-label="Close styles panel"
         >
           ×
         </button>
@@ -562,25 +593,29 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           <span class="slider-label">Color</span>
           <div class="color-swatches">
             {["#A6ABA4", "#6B7468", "#FFFFFF", "#FF5500", "#4a9eff"].map(
-              (swatchColor) => (
-                <button
-                  key={swatchColor}
-                  type="button"
-                  class={`color-swatch ${color.value.toLowerCase() === swatchColor.toLowerCase() ? "color-swatch--active" : ""}`}
-                  style={{ backgroundColor: swatchColor }}
-                  onClick={() => {
-                    color.value = swatchColor;
-                    applyStyle("color", swatchColor);
-                  }}
-                />
-              ),
+              (swatchColor, index) => {
+                const colorNames = ["Primary", "Secondary", "White", "Orange", "Blue"];
+                return (
+                  <button
+                    key={swatchColor}
+                    type="button"
+                    class={`color-swatch ${color.value.toLowerCase() === swatchColor.toLowerCase() ? "color-swatch--active" : ""}`}
+                    style={{ backgroundColor: swatchColor }}
+                    onClick={() => {
+                      color.value = swatchColor;
+                      applyStyle("color", swatchColor);
+                    }}
+                    aria-label={`Set color to ${colorNames[index]}`}
+                  />
+                );
+              },
             )}
           </div>
         </div>
 
         {/* Font Weight */}
         <div class="slider-wrapper">
-          <span class="slider-label">Weight</span>
+          <span class="slider-label" id="weight-label">Weight</span>
           <input
             type="range"
             class="style-slider"
@@ -592,6 +627,10 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
               fontWeight.value = (e.target as HTMLInputElement).value;
               applyStyle("font-weight", fontWeight.value);
             }}
+            aria-labelledby="weight-label"
+            aria-valuenow={parseInt(fontWeight.value)}
+            aria-valuemin={100}
+            aria-valuemax={900}
           />
           <span class="slider-value">{fontWeight.value}</span>
         </div>
@@ -641,7 +680,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
           <>
             {/* Optical Size */}
             <div class="slider-wrapper">
-              <span class="slider-label">Optical</span>
+              <span class="slider-label" id="optical-label">Optical</span>
               <input
                 type="range"
                 class="style-slider"
@@ -653,13 +692,17 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
                   opticalSize.value = (e.target as HTMLInputElement).value;
                   applyVariationSettings();
                 }}
+                aria-labelledby="optical-label"
+                aria-valuenow={parseInt(opticalSize.value)}
+                aria-valuemin={9}
+                aria-valuemax={144}
               />
               <span class="slider-value">{opticalSize.value}</span>
             </div>
 
             {/* Softness */}
             <div class="slider-wrapper">
-              <span class="slider-label">Soft</span>
+              <span class="slider-label" id="soft-label">Soft</span>
               <input
                 type="range"
                 class="style-slider"
@@ -671,6 +714,10 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
                   softness.value = (e.target as HTMLInputElement).value;
                   applyVariationSettings();
                 }}
+                aria-labelledby="soft-label"
+                aria-valuenow={parseInt(softness.value)}
+                aria-valuemin={0}
+                aria-valuemax={100}
               />
               <span class="slider-value">{softness.value}</span>
             </div>
@@ -681,7 +728,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         <div class="toggle-row">
           {isVariableFont.value && (
             <div class="toggle-item">
-              <span class="toggle-label">Wonk</span>
+              <span class="toggle-label" id="wonk-label">Wonk</span>
               <button
                 type="button"
                 class={`toggle-btn ${wonk.value === "1" ? "toggle-btn--active" : ""}`}
@@ -689,13 +736,15 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
                   wonk.value = wonk.value === "0" ? "1" : "0";
                   applyVariationSettings();
                 }}
+                aria-labelledby="wonk-label"
+                aria-pressed={wonk.value === "1"}
               >
                 <span class="toggle-knob" />
               </button>
             </div>
           )}
           <div class="toggle-item">
-            <span class="toggle-label">Italic</span>
+            <span class="toggle-label" id="italic-label">Italic</span>
             <button
               type="button"
               class={`toggle-btn ${slant.value === "1" ? "toggle-btn--active" : ""}`}
@@ -706,6 +755,8 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
                   slant.value === "1" ? "italic" : "normal",
                 );
               }}
+              aria-labelledby="italic-label"
+              aria-pressed={slant.value === "1"}
             >
               <span class="toggle-knob" />
             </button>
