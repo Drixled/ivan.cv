@@ -12,7 +12,15 @@ const links = [
 <nav class="py-6 md:py-8 relative">
   <ShapesGlow />
   <div class="flex justify-between items-center relative">
-    <a href="/" class="text-sm text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
+    <a href="/" class="flex items-center gap-2 text-sm text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
+      <svg class="ml-1 eye-logo" width="16" height="9" viewBox="0 0 144 78" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Eye shape -->
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M71.9996 77.6714C101.626 77.6714 127.333 58.7088 140.131 47.2846C145.288 42.6816 145.288 34.9898 140.131 30.3869C127.333 18.9627 101.626 0 71.9996 0C42.3731 0 16.6665 18.9627 3.86757 30.387C-1.2892 34.9898 -1.28919 42.6816 3.86758 47.2846C16.6665 58.7088 42.3731 77.6714 71.9996 77.6714Z" fill="currentColor"/>
+        <!-- Pupil (centered: 72 - 27.5 = 44.5, 39 - 27.5 = 11.5) -->
+        <g class="eye-pupil">
+          <path d="M54.1894 27.0946C54.1894 42.0589 42.0588 54.1894 27.0946 54.1894C12.1306 54.1894 0 42.0589 0 27.0946C0 12.1307 12.1306 0 27.0946 0C42.0588 0 54.1894 12.1307 54.1894 27.0946Z" fill="#000000" transform="translate(44.5, 11.5)"/>
+        </g>
+      </svg>
       Iván Uruchurtu
     </a>
     <ul class="flex gap-4 md:gap-6 text-sm">
@@ -33,3 +41,84 @@ const links = [
     </ul>
   </div>
 </nav>
+
+<style>
+  .eye-logo {
+    transform-origin: center;
+  }
+
+  .eye-logo.blink {
+    animation: blink 150ms ease-in-out;
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      transform: scaleY(1);
+    }
+    50% {
+      transform: scaleY(0.1);
+    }
+  }
+</style>
+
+<script>
+  function initEye() {
+    const eye = document.querySelector('.eye-logo');
+    const pupil = document.querySelector('.eye-pupil path');
+
+    if (!eye || !pupil) return;
+
+    const maxMoveX = 8;
+    const maxMoveY = 4;
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let animationId = null;
+    let blinkTimeout = null;
+
+    function onMouseMove(e) {
+      const rect = eye.getBoundingClientRect();
+      const eyeCenterX = rect.left + rect.width / 2;
+      const eyeCenterY = rect.top + rect.height / 2;
+
+      const normalizedX = (e.clientX - eyeCenterX) / window.innerWidth;
+      const normalizedY = (e.clientY - eyeCenterY) / window.innerHeight;
+
+      targetX = Math.max(-1, Math.min(1, normalizedX * 2)) * maxMoveX;
+      targetY = Math.max(-1, Math.min(1, normalizedY * 2)) * maxMoveY;
+    }
+
+    function animate() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      pupil.setAttribute('transform', `translate(${44.5 + currentX}, ${11.5 + currentY})`);
+      animationId = requestAnimationFrame(animate);
+    }
+
+    function scheduleBlink() {
+      const delay = 4000 + Math.random() * 6000;
+      blinkTimeout = setTimeout(() => {
+        eye.classList.add('blink');
+        setTimeout(() => eye.classList.remove('blink'), 150);
+        scheduleBlink();
+      }, delay);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+    animate();
+    scheduleBlink();
+
+    // Cleanup on page transition
+    document.addEventListener('astro:before-swap', () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      if (animationId) cancelAnimationFrame(animationId);
+      if (blinkTimeout) clearTimeout(blinkTimeout);
+    }, { once: true });
+  }
+
+  // Run on initial load and after View Transitions
+  initEye();
+  document.addEventListener('astro:after-swap', initEye);
+</script>
