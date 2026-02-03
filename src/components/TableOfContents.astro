@@ -1,0 +1,160 @@
+---
+// Table of Contents - positioned outside main container on left side
+// Extracts h2 headings from the page content via JavaScript
+---
+
+<nav class="toc-container hidden xl:block fixed left-8 top-1/2 -translate-y-1/2 z-40" aria-label="Table of contents">
+  <ul class="toc-list flex flex-col gap-3 text-sm">
+    <!-- Populated by JavaScript -->
+  </ul>
+</nav>
+
+<style>
+  .toc-container {
+    max-width: 180px;
+  }
+
+  .toc-list :global(a) {
+    display: block;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease-out;
+    line-height: 1.4;
+  }
+
+  .toc-list :global(a:hover) {
+    color: var(--color-text-primary);
+  }
+
+  .toc-list :global(a.active) {
+    color: var(--color-text-primary);
+  }
+
+  /* Subtle indicator for active item */
+  .toc-list :global(li) {
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .toc-list :global(li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background-color: var(--color-text-primary);
+    border-radius: 2px;
+    transition: height 0.15s ease-out;
+  }
+
+  .toc-list :global(li.active::before) {
+    height: 16px;
+  }
+</style>
+
+<script>
+  function initTableOfContents() {
+    const tocList = document.querySelector('.toc-list');
+    const projectContent = document.querySelector('.project-content');
+
+    if (!tocList || !projectContent) return;
+
+    // Clear existing items
+    tocList.innerHTML = '';
+
+    // Find all h2 headings in the project content
+    const headings = projectContent.querySelectorAll('h2');
+
+    if (headings.length === 0) return;
+
+    // Add "Intro" as the first item (links to header)
+    const introLi = document.createElement('li');
+    const introA = document.createElement('a');
+    introA.href = '#intro';
+    introA.textContent = 'Intro';
+    introLi.appendChild(introA);
+    tocList.appendChild(introLi);
+
+    // Add IDs to headings and create TOC links
+    headings.forEach((heading, index) => {
+      // Create slug from heading text
+      const text = heading.textContent || '';
+      const slug = text
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+
+      // Set ID on the heading
+      heading.id = slug || `section-${index}`;
+
+      // Create TOC item
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${heading.id}`;
+      a.textContent = text;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // Scroll spy - highlight active section
+    const tocLinks = tocList.querySelectorAll('a');
+    const tocItems = tocList.querySelectorAll('li');
+    const introHeader = document.getElementById('intro');
+
+    // Build array of all sections: intro + h2 headings
+    const allSections = introHeader ? [introHeader, ...headings] : [...headings];
+
+    function updateActiveLink() {
+      const windowHeight = window.innerHeight;
+
+      let activeIndex = 0;
+
+      allSections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        // Consider a section "active" when it's in the top 40% of the viewport
+        if (rect.top <= windowHeight * 0.4) {
+          activeIndex = index;
+        }
+      });
+
+      // Update active states
+      tocLinks.forEach((link, index) => {
+        link.classList.toggle('active', index === activeIndex);
+      });
+      tocItems.forEach((item, index) => {
+        item.classList.toggle('active', index === activeIndex);
+      });
+    }
+
+    // Initial check
+    updateActiveLink();
+
+    // Update on scroll
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+    // Smooth scroll to section on click
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href')?.slice(1);
+        const target = document.getElementById(targetId || '');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update URL without jumping
+          history.pushState(null, '', `#${targetId}`);
+        }
+      });
+    });
+
+    // Cleanup on page transition
+    document.addEventListener('astro:before-swap', () => {
+      window.removeEventListener('scroll', updateActiveLink);
+    }, { once: true });
+  }
+
+  // Run on initial load and after View Transitions
+  initTableOfContents();
+  document.addEventListener('astro:after-swap', initTableOfContents);
+</script>
