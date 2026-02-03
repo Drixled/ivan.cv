@@ -5,9 +5,11 @@ import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
 import preact from '@astrojs/preact';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://ivan.cv',
   output: 'static',
 
   image: {
@@ -26,5 +28,15 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [mdx(), preact()],
+  integrations: [
+    mdx(),
+    preact(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/playground') &&
+        !page.includes('/styleguide') &&
+        !page.includes('/project/rever') &&
+        !page.includes('/project/mediwallet'),
+    }),
+  ],
 });

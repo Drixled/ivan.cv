@@ -11,14 +11,40 @@ interface Props {
     responsibilities?: string[];
     context?: string;
     myJob?: string;
+    status?: string;
+    thumbnail?: { src: string };
   };
   slug: string;
 }
 
 const { frontmatter, slug } = Astro.props;
+const isComingSoon = frontmatter.status === 'coming-soon';
+const projectUrl = new URL(`/project/${slug}`, Astro.site);
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": frontmatter.title,
+  "description": frontmatter.description,
+  "url": projectUrl.href,
+  "creator": {
+    "@type": "Person",
+    "name": "Ivan Uruchurtu",
+    "url": "https://ivan.cv"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": frontmatter.company
+  },
+  "dateCreated": frontmatter.period
+};
 ---
 
-<BaseLayout title={`${frontmatter.title} | Ivan Uruchurtu`} description={frontmatter.description}>
+<BaseLayout
+  title={`${frontmatter.title} | Ivan Uruchurtu`}
+  description={frontmatter.description}
+  noindex={isComingSoon}
+>
   <article class="py-8 md:py-12 relative">
     <a
       href="/"
@@ -77,6 +103,9 @@ const { frontmatter, slug } = Astro.props;
     <div class="fade-stagger prose prose-invert prose-sm max-w-none project-content" data-stagger="4">
       <slot />
     </div>
+
+    <!-- Project-specific structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />
   </article>
 </BaseLayout>
 
