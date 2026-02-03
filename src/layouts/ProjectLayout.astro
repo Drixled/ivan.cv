@@ -92,7 +92,15 @@ const { frontmatter, slug } = Astro.props;
   .project-content :global(img) {
     border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: zoom-in;
+  }
+
+  /* Zoomable images - medium-zoom adds this class */
+  .project-content :global(img.medium-zoom-image) {
+    cursor: zoom-in !important;
+  }
+
+  .project-content :global(img.medium-zoom-image--opened) {
+    cursor: zoom-out !important;
   }
 
   .project-content :global(video) {
@@ -102,16 +110,3 @@ const { frontmatter, slug } = Astro.props;
   }
 </style>
 
-<script>
-  import mediumZoom from 'medium-zoom';
-
-  function initZoom() {
-    mediumZoom('.project-content img', {
-      background: 'rgba(0, 0, 0, 0.9)',
-      margin: 24,
-    });
-  }
-
-  initZoom();
-  document.addEventListener('astro:after-swap', initZoom);
-</script>

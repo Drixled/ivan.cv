@@ -9,9 +9,11 @@ interface Props {
   thumbnail?: ImageMetadata;
   slug?: string;
   bento?: boolean;
+  status?: 'coming-soon' | 'published';
 }
 
-const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
+const { title, role, period, thumbnail, slug, bento = false, status = 'published' } = Astro.props;
+const isComingSoon = status === 'coming-soon';
 ---
 
 <a href={slug ? `/project/${slug}` : '#'} class:list={["group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl", bento && "h-full"]} data-astro-prefetch="hover">
@@ -39,6 +41,15 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
           bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"
         ]}>
           <div class="w-full h-full bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
+        </div>
+      )}
+
+      <!-- Coming Soon Badge -->
+      {isComingSoon && (
+        <div class="absolute top-3 right-3 z-20">
+          <span class="px-2 py-1 text-[10px] uppercase tracking-wider font-mono bg-white/10 backdrop-blur-sm text-text-primary/80 rounded-full border border-white/10">
+            Coming Soon
+          </span>
         </div>
       )}
 
