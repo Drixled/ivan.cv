@@ -30,6 +30,7 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
   const position = useSignal(initialPos);
   const isDragging = useSignal(false);
   const dragOffset = useSignal({ x: 0, y: 0 });
+  const isPositioned = useSignal(false);
 
   // Current style values
   const color = useSignal("#e8e8e8");
@@ -159,6 +160,13 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
         top: selectedElement.value!.rect.top,
         left: selectedElement.value!.rect.right + gap,
       };
+
+      // Mark as positioned after a frame to ensure position is applied
+      requestAnimationFrame(() => {
+        isPositioned.value = true;
+      });
+    } else {
+      isPositioned.value = false;
     }
   }, [currentElement]);
 
@@ -266,7 +274,12 @@ export default function StylesPanel({ preview = false }: StylesPanelProps) {
       style={
         preview
           ? {}
-          : { top: `${position.value.top}px`, left: `${position.value.left}px` }
+          : {
+              top: `${position.value.top}px`,
+              left: `${position.value.left}px`,
+              opacity: isPositioned.value ? 1 : 0,
+              transition: 'opacity 0.15s ease'
+            }
       }
       onMouseDown={preview ? undefined : handleMouseDown}
     >

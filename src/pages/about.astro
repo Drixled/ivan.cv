@@ -1,24 +1,217 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const timeline = [
+    {
+        company: "Neurelo",
+        role: "Founding Designer",
+        dates: "2023–2025",
+        current: false,
+        description:
+            "API platform for databases. Joined pre-product market fit, built the design system, shaped the product from nothing.",
+    },
+    {
+        company: "Demiura",
+        role: "Founder",
+        dates: "2019–now",
+        current: true,
+        description:
+            "My keycap thing. GMK Mictlán, Gurokawa, and whatever's next. Group buys, vendor drama, Reddit fame.",
+    },
+    {
+        company: "Rever",
+        role: "Head of Design",
+        dates: "2018–2022",
+        current: false,
+        description:
+            "Frontline worker platform. Grew the team, shipped mobile + web, helped take it from scrappy to Sequoia-backed.",
+    },
+    {
+        company: "Mediwallet",
+        role: "Freelance",
+        dates: "2021",
+        current: false,
+        description:
+            "Healthcare fintech. Dense dashboards, compliance hell, made it usable anyway.",
+    },
+];
 ---
 
 <BaseLayout title="About | Ivan Uruchurtu">
-  <div class="py-12">
-    <h1 class="text-2xl font-medium mb-8">About</h1>
+    <div class="py-12">
+        <!-- Bio Section -->
+        <section class="fade-stagger max-w-2xl mb-20" data-stagger="0">
+            <p
+                class="font-display text-4xl font-light text-text-primary leading-[1.25] mb-10"
+                style="font-variation-settings: 'opsz' 48, 'SOFT' 0, 'WONK' 1;"
+            >
+                Twelve years of designing things people use and building things
+                people collect
+            </p>
 
-    <div class="space-y-6 text-text-secondary leading-relaxed">
-      <p>
-        Over the past decade, I've designed for early-stage startups across B2C, B2B, and developer tools.
-        Some of that work was for companies backed by Sequoia and Zetta.
-      </p>
+            <div class="space-y-5 text-text-primary leading-[1.75]">
+                <p>
+                    I design for startups, mostly B2B and dev tools. The kind of
+                    products where every pixel has to earn its place, because
+                    your users <em>will</em> notice when it doesn’t. I've done this
+                    at Sequoia-backed startups and a few that didn't make it. I’ve
+                    led teams and I've
+                    <em>been</em> the entire team.
+                </p>
 
-      <p>
-        I've led end-to-end design, from product to brand, and helped technical products make sense to real people.
-      </p>
+                <p>
+                    I also design custom mechanical and keyboard keycaps. What
+                    started as “I wonder if I could design one of these” turned
+                    into sold-out group buys, months-long production runs, and a
+                    loyal niche following. That’s Demiura now.
+                </p>
 
-      <p>
-        Beyond software, I design custom keyboards and keycaps as tactile artifacts — built with care, meant to be felt.
-      </p>
+                <p>
+                    I'm in Guadalajara, México. I work wherever it's fastest:
+                    Figma, browser, terminal, whatever. The tool doesn't matter.
+                    Shipping does.
+                </p>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="fade-stagger mb-16" data-stagger="1">
+            <h2
+                class="font-mono text-xs uppercase tracking-[0.15em] text-text-secondary mb-8"
+            >
+                Where I've worked
+            </h2>
+
+            <div class="timeline">
+                {
+                    timeline.map((item, index) => (
+                        <article
+                            class="timeline-item fade-stagger group"
+                            data-stagger={index + 2}
+                            data-current={item.current ? "true" : "false"}
+                        >
+                            <div class="timeline-content">
+                                <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1.5">
+                                    <h3 class="text-text-primary font-medium">
+                                        {item.company}
+                                    </h3>
+                                    <span class="text-text-secondary text-sm">
+                                        {item.role}
+                                    </span>
+                                    <span class="font-mono text-xs text-text-secondary/70 ml-auto">
+                                        {item.dates}
+                                    </span>
+                                </div>
+                                <p class="text-text-secondary text-sm leading-relaxed">
+                                    {item.description}
+                                </p>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <!-- Footer CTA -->
+        <section class="fade-stagger" data-stagger="6">
+            <div class="cta-divider mb-8"></div>
+            <p class="font-mono text-sm text-text-secondary">
+                Want to work together? <a
+                    href="mailto:hello@vheissu.me"
+                    class="text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+                    >Let's talk</a
+                >
+            </p>
+        </section>
     </div>
-  </div>
 </BaseLayout>
+
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 24px;
+    }
+
+    .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 1px;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            var(--color-text-secondary) 16px,
+            var(--color-text-secondary) calc(100% - 16px),
+            transparent
+        );
+        opacity: 0.3;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        transition:
+            border-color 0.15s ease,
+            background-color 0.15s ease !important;
+        transition-delay: 0s !important;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .timeline-item:hover {
+        border-color: rgba(255, 255, 255, 0.06);
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Timeline dot */
+    .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -24px;
+        top: 18px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        transform: translateX(-50%);
+        border: 1.5px solid var(--color-text-secondary);
+        background: var(--color-background);
+        transition:
+            border-color 0.15s ease,
+            box-shadow 0.15s ease,
+            background-color 0.15s ease;
+    }
+
+    /* Current role dot - filled */
+    .timeline-item[data-current="true"]::before {
+        background: var(--color-text-primary);
+        border-color: var(--color-text-primary);
+    }
+
+    /* Hover glow */
+    .timeline-item:hover::before {
+        border-color: var(--color-text-primary);
+        box-shadow: 0 0 8px rgba(166, 171, 164, 0.4);
+    }
+
+    .timeline-item[data-current="true"]:hover::before {
+        box-shadow: 0 0 12px rgba(166, 171, 164, 0.6);
+    }
+
+    /* CTA divider with gradient fade */
+    .cta-divider {
+        height: 1px;
+        background: linear-gradient(
+            to right,
+            var(--color-text-secondary),
+            transparent 80%
+        );
+        opacity: 0.3;
+    }
+</style>

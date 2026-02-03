@@ -97,8 +97,7 @@ function handleReplayClick(): void {
 
 function moveCursor(x: number, y: number): void {
   if (!demoCursor) return;
-  demoCursor.style.left = `${x}px`;
-  demoCursor.style.top = `${y}px`;
+  demoCursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
 }
 
 function showCursor(): void {
@@ -112,8 +111,7 @@ function hideCursor(): void {
 function showLabel(text: string, x: number, y: number): void {
   if (!demoLabel) return;
   demoLabel.textContent = text;
-  demoLabel.style.left = `${x + 28}px`;
-  demoLabel.style.top = `${y + 8}px`;
+  demoLabel.style.transform = `translate3d(${x + 28}px, ${y + 8}px, 0)`;
   demoLabel.classList.add('visible');
 }
 
@@ -123,19 +121,7 @@ function hideLabel(): void {
 
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => {
-    const timeout = setTimeout(() => {
-      if (aborted) {
-        resolve();
-        return;
-      }
-      resolve();
-    }, ms);
-
-    // Store timeout for potential cleanup
-    if (aborted) {
-      clearTimeout(timeout);
-      resolve();
-    }
+    setTimeout(resolve, ms);
   });
 }
 
@@ -228,66 +214,45 @@ async function runDemo(): Promise<void> {
 
   // Step 3: Trigger hover state, show label
   triggerHover(heroTitle);
-  showLabel('hover to inspect', titleCenterX, titleCenterY);
+  showLabel('Hover and click to inspect', titleCenterX, titleCenterY);
   await wait(1200);
   if (aborted) return cleanup();
 
-  // Step 4: Trigger click/panel open, show label
+  // Step 4: Trigger click/panel open
   hideLabel();
   triggerSelect(heroTitle);
-  await wait(300);
-  if (aborted) return cleanup();
-
-  showLabel('click to edit styles', titleCenterX, titleCenterY);
-  await wait(1500);
-  if (aborted) return cleanup();
-
-  // Step 5: Move cursor to panel and interact with weight slider
-  hideLabel();
-  await wait(200);
+  await wait(500);
   if (aborted) return cleanup();
 
   const panel = document.querySelector('.styles-panel') as HTMLElement;
   if (panel) {
-    const panelRect = panel.getBoundingClientRect();
-    // Target the weight slider (second slider-wrapper)
-    const sliders = panel.querySelectorAll('.slider-wrapper');
-    const weightSlider = sliders[1] as HTMLElement;
+    // Target the text-primary color swatch (#A6ABA4)
+    const colorSwatches = panel.querySelectorAll('.color-swatch');
+    const primarySwatch = colorSwatches[0] as HTMLElement;
 
-    if (weightSlider) {
-      const sliderRect = weightSlider.getBoundingClientRect();
-      const sliderX = sliderRect.left + sliderRect.width / 2;
-      const sliderY = sliderRect.top + sliderRect.height / 2;
+    if (primarySwatch) {
+      const swatchRect = primarySwatch.getBoundingClientRect();
+      const swatchX = swatchRect.left + swatchRect.width / 2;
+      const swatchY = swatchRect.top + swatchRect.height / 2;
 
-      moveCursor(sliderX, sliderY);
+      moveCursor(swatchX, swatchY);
       await wait(500);
       if (aborted) return cleanup();
 
-      showLabel('live preview', sliderX, sliderY);
+      // Click the swatch to change color
+      if (heroTitle) {
+        // Simulate click on swatch
+        primarySwatch.click();
 
-      // Change the weight value
-      const input = weightSlider.querySelector('input[type="range"]') as HTMLInputElement;
-      if (input && heroTitle) {
-        const originalValue = input.value;
+        await wait(300);
+        if (aborted) return cleanup();
 
-        // Animate to new value
-        input.value = '600';
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        heroTitle.style.fontWeight = '600';
+        showLabel('Play with the styles', swatchX, swatchY);
 
-        await wait(1000);
+        await wait(1500);
         if (aborted) {
-          // Revert before cleanup
-          input.value = originalValue;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          heroTitle.style.fontWeight = '';
           return cleanup();
         }
-
-        // Revert value
-        input.value = originalValue;
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        heroTitle.style.fontWeight = '';
       }
     }
   }
