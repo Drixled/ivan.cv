@@ -8,7 +8,7 @@ const timeline = [
         dates: "2023–2025",
         current: false,
         description:
-            "API platform for databases. Joined pre-product market fit, built the design system, shaped the product from nothing.",
+            "API platform for databases. Came in early, set the design foundation, and shipped the core experience end to end.",
     },
     {
         company: "Demiura",
@@ -16,7 +16,7 @@ const timeline = [
         dates: "2019–now",
         current: true,
         description:
-            "My keycap thing. GMK Mictlán, Gurokawa, and whatever's next. Group buys, vendor drama, Reddit fame.",
+            'Keyboard and keycap studio. <a href="https://www.perplexity.ai/search?q=GMK+Mictlán" target="_blank" rel="noopener noreferrer" class="text-text-primary hover:text-text-secondary transition-colors underline">GMK Mictlán</a>, <a href="https://www.perplexity.ai/search?q=GMK+Gurokawa" target="_blank" rel="noopener noreferrer" class="text-text-primary hover:text-text-secondary transition-colors underline">GMK Gurokawa</a>, and whatever\'s next. Sold-out group buys, long runs, shipped worldwide.',
     },
     {
         company: "Rever",
@@ -24,7 +24,7 @@ const timeline = [
         dates: "2018–2022",
         current: false,
         description:
-            "Frontline worker platform. Grew the team, shipped mobile + web, helped take it from scrappy to Sequoia-backed.",
+            "Frontline worker platform. Built and led design, shipped across mobile and web, scaled it through the Sequoia chapter.",
     },
     {
         company: "Mediwallet",
@@ -32,7 +32,7 @@ const timeline = [
         dates: "2021",
         current: false,
         description:
-            "Healthcare fintech. Dense dashboards, compliance hell, made it usable anyway.",
+            "Healthcare fintech. Simplified complex dashboard workflows under strict compliance requirements.",
     },
 ];
 ---
@@ -102,26 +102,15 @@ const timeline = [
                                         {item.dates}
                                     </span>
                                 </div>
-                                <p class="text-text-secondary text-sm leading-relaxed">
-                                    {item.description}
-                                </p>
+                                <p
+                                    class="text-text-secondary text-sm leading-relaxed"
+                                    set:html={item.description}
+                                />
                             </div>
                         </article>
                     ))
                 }
             </div>
-        </section>
-
-        <!-- Footer CTA -->
-        <section class="fade-stagger" data-stagger="6">
-            <div class="cta-divider mb-8"></div>
-            <p class="font-mono text-sm text-text-secondary">
-                Want to work together? <a
-                    href="mailto:hello@vheissu.me"
-                    class="text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
-                    >Let's talk</a
-                >
-            </p>
         </section>
     </div>
 </BaseLayout>
@@ -202,16 +191,5 @@ const timeline = [
 
     .timeline-item[data-current="true"]:hover::before {
         box-shadow: 0 0 12px rgba(166, 171, 164, 0.6);
-    }
-
-    /* CTA divider with gradient fade */
-    .cta-divider {
-        height: 1px;
-        background: linear-gradient(
-            to right,
-            var(--color-text-secondary),
-            transparent 80%
-        );
-        opacity: 0.3;
     }
 </style>
