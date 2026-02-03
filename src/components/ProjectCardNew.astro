@@ -19,7 +19,7 @@ const isComingSoon = status === 'coming-soon';
 <a href={slug ? `/project/${slug}` : '#'} class:list={["group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-3xl", bento && "h-full"]} data-astro-prefetch="hover">
   <div class:list={["bg-card p-2 rounded-3xl flex flex-col gap-3 border border-white/[0.03]", bento && "h-full"]}>
     <!-- Thumbnail Container -->
-    <div class:list={["relative bg-background rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "h-[338px]"]}>
+    <div class:list={["relative bg-background rounded-2xl overflow-hidden", bento ? "flex-1 min-h-0" : "aspect-[4/3] sm:aspect-[16/10]"]}>
       <!-- Image -->
       {thumbnail ? (
         <Image
@@ -32,13 +32,13 @@ const isComingSoon = status === 'coming-soon';
           loading="lazy"
           class:list={[
             "absolute top-0 left-0 right-0 z-10 w-full object-cover rounded-2xl transition-[height] duration-300",
-            bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"
+            bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-full group-hover:h-[calc(100%-32px)]"
           ]}
         />
       ) : (
         <div class:list={[
           "absolute top-0 left-0 right-0 z-10 w-full bg-[#121212] rounded-2xl transition-[height] duration-300",
-          bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"
+          bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-full group-hover:h-[calc(100%-32px)]"
         ]}>
           <div class="w-full h-full bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
         </div>
@@ -66,7 +66,7 @@ const isComingSoon = status === 'coming-soon';
 
     <!-- Meta -->
     <div class="relative flex items-end justify-between px-1 pb-1">
-      <h3 class="text-[32px] font-display font-light text-text-primary leading-8 tracking-tight">
+      <h3 class="text-2xl sm:text-[28px] md:text-[32px] font-display font-light text-text-primary leading-7 sm:leading-8 tracking-tight">
         {title}
       </h3>
 

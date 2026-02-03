@@ -9,13 +9,13 @@ const links = [
 ];
 ---
 
-<nav class="py-8 relative">
+<nav class="py-6 md:py-8 relative">
   <ShapesGlow />
   <div class="flex justify-between items-center relative">
     <a href="/" class="text-sm text-text-primary hover:text-text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm">
       Iván Uruchurtu
     </a>
-    <ul class="flex gap-6 text-sm">
+    <ul class="flex gap-4 md:gap-6 text-sm">
       {links.map(link => (
         <li>
           <a

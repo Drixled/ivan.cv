@@ -19,18 +19,18 @@ const { frontmatter, slug } = Astro.props;
 ---
 
 <BaseLayout title={`${frontmatter.title} | Ivan Uruchurtu`} description={frontmatter.description}>
-  <article class="py-12 relative">
+  <article class="py-8 md:py-12 relative">
     <a
       href="/"
-      class="fade-stagger text-text-secondary hover:text-text-primary transition-colors text-sm absolute top-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
+      class="fade-stagger text-text-secondary hover:text-text-primary transition-colors text-sm absolute top-2 md:top-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm"
       data-stagger="0"
     >
       &larr; Back
     </a>
 
-    <header class="mb-12">
+    <header class="mb-8 md:mb-12">
       <h1
-        class="fade-stagger text-7xl font-display font-light text-text-primary mb-4 leading-[1.15]"
+        class="fade-stagger text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-light text-text-primary mb-4 leading-[1.2] md:leading-[1.15]"
         data-stagger="1"
         style="font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 1;"
       >
@@ -38,7 +38,7 @@ const { frontmatter, slug } = Astro.props;
       </h1>
 
       <!-- Metadata Row -->
-      <div class="fade-stagger flex flex-wrap gap-12 mt-10" data-stagger="2">
+      <div class="fade-stagger flex flex-wrap gap-6 md:gap-12 mt-6 md:mt-10" data-stagger="2">
         <div>
           <p class="text-xs uppercase tracking-[1.2px] text-text-secondary font-mono mb-2">Role</p>
           <p class="text-text-primary text-sm">{frontmatter.role}</p>
@@ -48,7 +48,7 @@ const { frontmatter, slug } = Astro.props;
           <p class="text-text-primary text-sm">{frontmatter.period}</p>
         </div>
         {frontmatter.responsibilities && frontmatter.responsibilities.length > 0 && (
-          <div class="ml-7">
+          <div class="w-full md:w-auto md:ml-7">
             <p class="text-xs uppercase tracking-[1.2px] text-text-secondary font-mono mb-2">Responsibilities</p>
             <p class="text-text-primary text-sm" set:html={frontmatter.responsibilities.join(' &middot; ')} />
           </div>
@@ -57,7 +57,7 @@ const { frontmatter, slug } = Astro.props;
 
       <!-- Context & My Job -->
       {(frontmatter.context || frontmatter.myJob) && (
-        <div class="fade-stagger flex flex-col gap-6 mt-10 max-w-2xl" data-stagger="3">
+        <div class="fade-stagger flex flex-col gap-4 md:gap-6 mt-6 md:mt-10 max-w-2xl" data-stagger="3">
           {frontmatter.context && (
             <div>
               <p class="text-xs uppercase tracking-[1.2px] text-text-secondary font-mono mb-2">Context</p>
@@ -84,14 +84,36 @@ const { frontmatter, slug } = Astro.props;
   .project-content :global(h2) {
     font-family: var(--font-display);
     font-weight: 300;
-    font-size: 2rem;
-    line-height: 1.15;
+    font-size: 1.5rem;
+    line-height: 1.25;
     color: var(--color-text-primary);
   }
 
+  @media (min-width: 640px) {
+    .project-content :global(h2) {
+      font-size: 1.75rem;
+      line-height: 1.2;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .project-content :global(h2) {
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+  }
+
   .project-content :global(img) {
-    border-radius: 1rem;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: 640px) {
+    .project-content :global(img) {
+      border-radius: 1rem;
+    }
   }
 
   /* Zoomable images - medium-zoom adds this class */
