@@ -29,13 +29,13 @@ const { title, role, period, thumbnail, slug, bento = false } = Astro.props;
           quality={85}
           loading="lazy"
           class:list={[
-            "absolute top-0 left-0 right-0 z-10 w-full object-cover rounded-2xl transition-all duration-300",
+            "absolute top-0 left-0 right-0 z-10 w-full object-cover rounded-2xl transition-[height] duration-300",
             bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"
           ]}
         />
       ) : (
         <div class:list={[
-          "absolute top-0 left-0 right-0 z-10 w-full bg-[#121212] rounded-2xl transition-all duration-300",
+          "absolute top-0 left-0 right-0 z-10 w-full bg-[#121212] rounded-2xl transition-[height] duration-300",
           bento ? "h-full group-hover:h-[calc(100%-32px)]" : "h-[338px] group-hover:h-[306px]"
         ]}>
           <div class="w-full h-full bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
