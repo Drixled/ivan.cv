@@ -44,13 +44,13 @@ const wrapperProps = isComingSoon
           loading="lazy"
           class:list={[
             "absolute top-0 left-0 right-0 z-10 w-full object-cover object-top rounded-2xl transition-[height] duration-300 h-full",
-            !isComingSoon && "group-hover:h-[calc(100%-32px)]"
+            "group-hover:h-[calc(100%-32px)]"
           ]}
         />
       ) : (
         <div class:list={[
           "absolute top-0 left-0 right-0 z-10 w-full bg-[#121212] rounded-2xl transition-[height] duration-300 h-full",
-          !isComingSoon && "group-hover:h-[calc(100%-32px)]"
+          "group-hover:h-[calc(100%-32px)]"
         ]}>
           <div class="w-full h-full bg-gradient-to-br from-orange-900/30 via-red-900/20 to-purple-900/30 rounded-2xl"></div>
         </div>
@@ -83,7 +83,7 @@ const wrapperProps = isComingSoon
       </h3>
 
       <!-- Arrow Button -->
-      <div class:list={["bg-card-hover p-1 rounded-2xl transition-colors", !isComingSoon && "group-hover:bg-[#252525]"]}>
+      <div class:list={["bg-card-hover p-1 rounded-2xl transition-colors", "group-hover:bg-[#252525]"]}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class:list={["text-text-primary", isComingSoon && "opacity-40"]} aria-hidden="true">
           <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
