@@ -42,25 +42,13 @@ function fadeOutStagger(): Promise<void> {
   });
 }
 
-// Initialize on page load
+// Initialize on page load (no View Transitions, so just DOMContentLoaded)
 if (typeof document !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initFadeStagger);
   } else {
     initFadeStagger();
   }
-
-  // Handle View Transitions
-  document.addEventListener('astro:page-load', initFadeStagger);
-
-  // Fade out before page swap
-  document.addEventListener('astro:before-preparation', async (event) => {
-    const originalLoader = event.loader;
-    event.loader = async function () {
-      await fadeOutStagger();
-      await originalLoader();
-    };
-  });
 }
 
 export { initFadeStagger, fadeOutStagger };
