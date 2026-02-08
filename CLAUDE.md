@@ -60,3 +60,9 @@ Projects have:
 - period
 - role
 - order (for sorting)
+
+## Coding Rules
+
+When fixing CSS/styling issues, always test the change in multiple browsers (Chrome, Safari, Firefox) before committing, especially for animations and transitions.
+
+For UI bug fixes, prefer minimal targeted changes over removing entire systems. If a fix breaks something else, pause and explain the tradeoff before proceeding.

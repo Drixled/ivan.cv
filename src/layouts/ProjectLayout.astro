@@ -139,17 +139,13 @@ const projectSchema = {
     height: auto;
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: zoom-in;
   }
 
   @media (min-width: 640px) {
     .project-content :global(img) {
       border-radius: 1rem;
     }
-  }
-
-  /* Zoomable images - medium-zoom adds this class */
-  .project-content :global(img.medium-zoom-image) {
-    cursor: zoom-in !important;
   }
 
   .project-content :global(img.medium-zoom-image--opened) {

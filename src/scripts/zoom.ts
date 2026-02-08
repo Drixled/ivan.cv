@@ -54,7 +54,14 @@ function cleanup(): void {
 }
 
 if (typeof document !== 'undefined') {
-  // Handle View Transitions
+  // Initialize immediately for pages without ClientRouter
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initZoom);
+  } else {
+    initZoom();
+  }
+
+  // Handle View Transitions (if ClientRouter is added later)
   document.addEventListener('astro:page-load', initZoom);
   document.addEventListener('astro:before-swap', cleanup);
 }
