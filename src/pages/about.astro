@@ -45,7 +45,10 @@ const timeline = [
 ];
 ---
 
-<BaseLayout title="About | Ivan Uruchurtu" description="Product designer with 12+ years of experience in B2B, developer tools, and startups. Also designs custom mechanical keyboard keycaps through Demiura. Based in Guadalajara, México.">
+<BaseLayout
+    title="About | Ivan Uruchurtu"
+    description="Product designer with 12+ years of experience in B2B, developer tools, and startups. Also designs custom mechanical keyboard keycaps through Demiura. Based in Guadalajara, México."
+>
     <div class="py-8 md:py-12">
         <!-- Bio Section -->
         <section class="fade-stagger max-w-2xl mb-12 md:mb-20" data-stagger="0">
@@ -53,25 +56,24 @@ const timeline = [
                 class="font-display text-2xl sm:text-3xl md:text-4xl font-light text-text-primary leading-[1.3] md:leading-[1.25] mb-6 md:mb-10"
                 style="font-variation-settings: 'opsz' 48, 'SOFT' 0, 'WONK' 1;"
             >
-                Twelve years of designing things people use and building things
+                Twelve years of designing things people use and shipping things
                 people collect
             </p>
 
-            <div class="space-y-5 text-text-primary leading-[1.75]">
+            <div class="space-y-5 text-text-primary leading-relaxed sm:leading-[22px]">
                 <p>
                     I design for startups, mostly B2B and dev tools. The kind of
                     products where every pixel has to earn its place, because
-                    your users <em>will</em> notice when it doesn’t. I've done this
-                    at Sequoia-backed startups and a few that didn't make it. I’ve
-                    led teams and I've
-                    <em>been</em> the entire team.
+                    your users <em>will</em> notice when it doesn't. I've done this
+                    at Sequoia-backed startups and a few that didn't make it. I've
+                    led teams and I've <em>been</em> the entire team.
                 </p>
 
                 <p>
-                    I also design custom mechanical and keyboard keycaps. What
-                    started as “I wonder if I could design one of these” turned
-                    into sold-out group buys, months-long production runs, and a
-                    loyal niche following. That’s Demiura now.
+                    I also design and ship physical products through <a href="#" data-coming-soon class="text-text-primary hover:text-white transition-colors underline decoration-text-secondary/40 underline-offset-2 cursor-default" onclick="return false">Demiura</a>.
+                    What started as curiosity turned into sold-out production
+                    runs, vendors across 20+ countries, and a loyal following.
+                    The whole lifecycle, from concept to someone's desk.
                 </p>
 
                 <p>
@@ -200,4 +202,65 @@ const timeline = [
     .timeline-item[data-current="true"]:hover::before {
         box-shadow: 0 0 12px rgba(166, 171, 164, 0.6);
     }
+
+
 </style>
+
+<script>
+    function initComingSoonTooltip() {
+        const trigger = document.querySelector('[data-coming-soon]');
+        if (!trigger) return;
+
+        // Clean up any existing tooltip from previous navigation
+        document.getElementById('coming-soon-tooltip')?.remove();
+
+        let tooltip: HTMLDivElement | null = null;
+
+        function createTooltip() {
+            tooltip = document.createElement('div');
+            tooltip.id = 'coming-soon-tooltip';
+            tooltip.textContent = 'Coming soon';
+            Object.assign(tooltip.style, {
+                position: 'fixed',
+                top: '0',
+                left: '0',
+                pointerEvents: 'none',
+                zIndex: '10000',
+                opacity: '0',
+                background: 'linear-gradient(156deg, rgba(215, 251, 219, 0.9) 4%, rgba(202, 249, 253, 0.9) 49%, rgba(244, 207, 255, 0.9) 101%)',
+                backdropFilter: 'blur(8px)',
+                color: '#000',
+                fontFamily: "ui-monospace, 'JetBrains Mono', monospace",
+                fontSize: '0.75rem',
+                padding: '0.375rem 0.625rem',
+                borderRadius: '6px',
+                whiteSpace: 'nowrap',
+                transition: 'opacity 0.2s ease-out',
+                willChange: 'transform, opacity',
+            });
+            document.body.appendChild(tooltip);
+        }
+
+        function onMouseEnter() {
+            if (!tooltip) createTooltip();
+            tooltip!.style.opacity = '1';
+        }
+
+        function onMouseMove(e: MouseEvent) {
+            if (!tooltip) return;
+            tooltip.style.transform = `translate3d(${e.clientX + 16}px, ${e.clientY - 32}px, 0)`;
+        }
+
+        function onMouseLeave() {
+            if (tooltip) tooltip.style.opacity = '0';
+        }
+
+        trigger.addEventListener('mouseenter', onMouseEnter);
+        trigger.addEventListener('mousemove', onMouseMove);
+        trigger.addEventListener('mouseleave', onMouseLeave);
+    }
+
+    // Init on load and on View Transitions navigation
+    initComingSoonTooltip();
+    document.addEventListener('astro:page-load', initComingSoonTooltip);
+</script>
