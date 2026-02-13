@@ -29,6 +29,7 @@ const mediwallet = projectMap['mediwallet'];
             title={neurelo.data.title}
             role={neurelo.data.role}
             period={neurelo.data.period}
+            tagline={neurelo.data.tagline}
             thumbnail={neurelo.data.thumbnail}
             slug={neurelo.id}
             bento={true}
@@ -42,6 +43,7 @@ const mediwallet = projectMap['mediwallet'];
             title={mictlan.data.title}
             role={mictlan.data.role}
             period={mictlan.data.period}
+            tagline={mictlan.data.tagline}
             thumbnail={mictlan.data.thumbnail}
             slug={mictlan.id}
             bento={true}
@@ -50,32 +52,34 @@ const mediwallet = projectMap['mediwallet'];
       )}
     </div>
 
-    <!-- Row 3: Rever (5-col) + Mediwallet (7-col) -->
+    <!-- Row 3: Mediwallet (5-col) + Rever (7-col) -->
     <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 mb-3 sm:mb-4">
-      {rever && (
-        <div class="fade-stagger md:col-span-5 h-[300px] sm:h-[350px] md:h-[400px]" data-stagger="4">
-          <ProjectCardNew
-            title={rever.data.title}
-            role={rever.data.role}
-            period={rever.data.period}
-            thumbnail={rever.data.thumbnail}
-            slug={rever.id}
-            bento={true}
-            status={rever.data.status}
-          />
-        </div>
-      )}
-
       {mediwallet && (
-        <div class="fade-stagger md:col-span-7 h-[300px] sm:h-[350px] md:h-[400px]" data-stagger="5">
+        <div class="fade-stagger md:col-span-5 h-[300px] sm:h-[350px] md:h-[400px]" data-stagger="4">
           <ProjectCardNew
             title={mediwallet.data.title}
             role={mediwallet.data.role}
             period={mediwallet.data.period}
+            tagline={mediwallet.data.tagline}
             thumbnail={mediwallet.data.thumbnail}
             slug={mediwallet.id}
             bento={true}
             status={mediwallet.data.status}
+          />
+        </div>
+      )}
+
+      {rever && (
+        <div class="fade-stagger md:col-span-7 h-[300px] sm:h-[350px] md:h-[400px]" data-stagger="5">
+          <ProjectCardNew
+            title={rever.data.title}
+            role={rever.data.role}
+            period={rever.data.period}
+            tagline={rever.data.tagline}
+            thumbnail={rever.data.thumbnail}
+            slug={rever.id}
+            bento={true}
+            status={rever.data.status}
           />
         </div>
       )}

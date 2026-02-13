@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  tagline?: string;
+  thumbnail?: ImageMetadata;
+  slug: string;
+}
+
+const { title, tagline, thumbnail, slug } = Astro.props;
+---
+
+<a
+  href={`/project/${slug}`}
+  data-astro-prefetch="hover"
+  class="up-next group block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+>
+  <div class="up-next-inner rounded-2xl p-2 transition-colors duration-300">
+    <div class="flex items-stretch gap-4">
+      <!-- Thumbnail -->
+      {thumbnail && (
+        <div class="up-next-thumb shrink-0 w-28 sm:w-36 rounded-xl overflow-hidden">
+          <Image
+            src={thumbnail}
+            alt={title}
+            widths={[288, 576]}
+            sizes="(max-width: 640px) 112px, 144px"
+            format="webp"
+            quality={90}
+            loading="lazy"
+            class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+          />
+        </div>
+      )}
+
+      <!-- Content -->
+      <div class="flex-1 min-w-0 py-3 sm:py-4 pr-2 flex flex-col justify-center">
+        <p class="text-xs font-sans font-medium uppercase tracking-[0.05em] text-text-secondary mb-2">Up next</p>
+        <h3 class="up-next-title font-display font-light text-text-primary text-2xl sm:text-[1.75rem] md:text-[2rem] leading-[1.25] sm:leading-[1.2] md:leading-[1.15]">
+          {title}
+        </h3>
+        {tagline && (
+          <p class="text-base text-text-secondary mt-0.5 leading-[1.7]">{tagline}</p>
+        )}
+      </div>
+
+      <!-- Arrow -->
+      <div class="shrink-0 self-start mt-2 mr-1">
+        <div class="up-next-arrow bg-card-hover p-1 rounded-2xl transition-colors group-hover:bg-[#252525]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-text-primary" aria-hidden="true">
+            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+
+<style>
+  .up-next-inner {
+    background: var(--color-card);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .up-next:hover .up-next-inner {
+    background: var(--color-card-hover);
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+
+  .up-next-title {
+    transition: color 0.3s ease;
+  }
+
+  .up-next:hover .up-next-title {
+    color: #fff;
+  }
+
+  .up-next-thumb {
+    transition: border-color 0.3s ease;
+  }
+</style>

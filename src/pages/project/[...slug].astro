@@ -4,16 +4,28 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map((project) => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+  const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
+  const published = sorted.filter((p) => p.data.status !== 'coming-soon');
+
+  return sorted.map((project) => {
+    // Find next published project after this one (by order), wrapping around
+    const currentOrder = project.data.order;
+    const nextProject =
+      published.find((p) => p.data.order > currentOrder) ?? published[0];
+    // Don't link to yourself
+    const upNext = nextProject?.id !== project.id ? nextProject : undefined;
+
+    return {
+      params: { slug: project.id },
+      props: { project, nextProject: upNext },
+    };
+  });
 }
 
-const { project } = Astro.props;
+const { project, nextProject } = Astro.props;
 const { Content } = await render(project);
 ---
 
-<ProjectLayout frontmatter={project.data} slug={project.id}>
+<ProjectLayout frontmatter={project.data} slug={project.id} nextProject={nextProject}>
   <Content />
 </ProjectLayout>

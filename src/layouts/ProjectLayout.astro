@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import UpNext from '../components/UpNext.astro';
 
 interface Props {
   frontmatter: {
@@ -16,9 +17,17 @@ interface Props {
     thumbnail?: { src: string };
   };
   slug: string;
+  nextProject?: {
+    id: string;
+    data: {
+      title: string;
+      tagline?: string;
+      thumbnail?: any;
+    };
+  };
 }
 
-const { frontmatter, slug } = Astro.props;
+const { frontmatter, slug, nextProject } = Astro.props;
 const isComingSoon = frontmatter.status === 'coming-soon';
 const projectUrl = new URL(`/project/${slug}`, Astro.site);
 
@@ -83,6 +92,18 @@ const projectSchema = {
     <div class="fade-stagger prose prose-invert prose-sm max-w-none project-content" data-stagger="4">
       <slot />
     </div>
+
+    <!-- Up Next -->
+    {nextProject && (
+      <section class="mt-20 md:mt-32 border-t border-white/[0.06] pt-10 md:pt-14">
+        <UpNext
+          title={nextProject.data.title}
+          tagline={nextProject.data.tagline}
+          thumbnail={nextProject.data.thumbnail}
+          slug={nextProject.id}
+        />
+      </section>
+    )}
 
     <!-- Project-specific structured data -->
     <script type="application/ld+json" set:html={JSON.stringify(projectSchema)} />

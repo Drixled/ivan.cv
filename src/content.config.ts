@@ -14,6 +14,7 @@ const projects = defineCollection({
       responsibilities: z.array(z.string()).optional(),
       context: z.string().optional(),
       myJob: z.string().optional(),
+      tagline: z.string().optional(),
       status: z.enum(['coming-soon', 'published']).optional(),
       order: z.number(),
     }),
