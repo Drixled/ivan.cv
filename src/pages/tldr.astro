@@ -1,0 +1,394 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatsGrid from '../components/StatsGrid.astro';
+import TimelineMicro from '../components/TimelineMicro.astro';
+import { Image } from 'astro:assets';
+import keycapHero from '../assets/projects/mictlan/DSC03430.jpg';
+---
+
+<BaseLayout
+  title="TL;DR | Ivan Uruchurtu"
+  description="The 60-second version. Twelve years shipping software and physical products, from Sequoia-backed startups to sold-out keycap sets."
+>
+  <div class="py-8 md:py-12">
+
+    <!-- Hero + Availability -->
+    <section class="mb-12 md:mb-20">
+      <div class="flex flex-wrap items-center gap-3 mb-4 fade-stagger" data-stagger="0">
+        <span class="availability-badge">
+          <span class="availability-dot"></span>
+          Open to roles
+        </span>
+      </div>
+      <h1
+        class="fade-stagger font-display text-3xl sm:text-4xl md:text-5xl font-light text-white leading-[1.2] mb-3"
+        data-stagger="0"
+        style="font-variation-settings: 'opsz' 48, 'SOFT' 0, 'WONK' 1;"
+      >
+        The TL;DR
+      </h1>
+      <p class="fade-stagger text-text-secondary text-base sm:text-lg leading-relaxed max-w-lg mb-4" data-stagger="1">
+        Everything worth knowing, under 60 seconds.
+      </p>
+      <p class="fade-stagger text-text-secondary/70 text-sm" data-stagger="1">
+        Looking for founding or senior design engineer roles at early-stage startups.
+      </p>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="mb-12 md:mb-20">
+      <h2 class="fade-stagger font-mono text-xs uppercase tracking-[0.15em] text-text-secondary mb-6" data-stagger="1">
+        By the numbers
+      </h2>
+      <StatsGrid />
+    </section>
+
+    <!-- Testimonial -->
+    <section class="mb-12 md:mb-20 fade-stagger" data-stagger="8">
+      <div class="testimonial">
+        <svg class="testimonial-mark" width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M11 7.5H7.5C6.12 7.5 5 8.62 5 10v1.5c0 1.38 1.12 2.5 2.5 2.5H9c.55 0 1 .45 1 1v.5c0 1.38-1.12 2.5-2.5 2.5H7c-.28 0-.5.22-.5.5s.22.5.5.5h.5C9.98 19 12 16.98 12 14.5v-6c0-.55-.45-1-1-1zm7 0h-3.5C13.12 7.5 12 8.62 12 10v1.5c0 1.38 1.12 2.5 2.5 2.5H16c.55 0 1 .45 1 1v.5c0 1.38-1.12 2.5-2.5 2.5H14c-.28 0-.5.22-.5.5s.22.5.5.5h.5c2.48 0 4.5-2.02 4.5-4.5v-6c0-.55-.45-1-1-1z" fill="currentColor"/>
+        </svg>
+        <blockquote>
+          <p class="testimonial-quote">Ivan was our entire design org. He built the design system, shipped the product, ran the marketing site, and still found time to push for things nobody asked for but everyone needed.</p>
+        </blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">GK</div>
+          <div class="testimonial-author-info">
+            <span class="testimonial-name">Guru Kamat</span>
+            <span class="testimonial-role">CTO & Co-founder, Neurelo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How I Work + Tools -->
+    <section class="mb-12 md:mb-20">
+      <h2 class="fade-stagger font-mono text-xs uppercase tracking-[0.15em] text-text-secondary mb-6 md:mb-8" data-stagger="8">
+        How I work
+      </h2>
+      <div class="fade-stagger" data-stagger="8">
+        <p class="text-text-primary text-base sm:text-lg leading-relaxed mb-6 max-w-2xl">
+          I design and build. This portfolio is hand-coded in Astro and Tailwind&mdash;not a template. I move between Figma and the browser because the fastest way to ship is to close the gap between design and code.
+        </p>
+        <div class="tools-strip">
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z"/><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z"/></svg>
+            Figma
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            VS Code
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            TypeScript
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" opacity="0"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>
+            React
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Tailwind
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Astro
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg>
+            Git
+          </span>
+          <span class="tool-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            Terminal
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Personality: Keycap Hero -->
+    <section class="mb-12 md:mb-20 fade-stagger" data-stagger="8">
+      <div class="keycap-hero">
+        <Image
+          src={keycapHero}
+          alt="GMK Mictlan keycap set on a custom mechanical keyboard with colorful accent keys"
+          class="keycap-hero-img"
+          widths={[480, 768, 1024]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 960px"
+          quality={80}
+        />
+        <p class="keycap-hero-caption">
+          GMK Mictlan &mdash; Best-seller of 2023. Designed, produced, and shipped worldwide through Demiura.
+        </p>
+      </div>
+    </section>
+
+    <!-- Compressed Timeline -->
+    <section class="mb-12 md:mb-20">
+      <h2 class="fade-stagger font-mono text-xs uppercase tracking-[0.15em] text-text-secondary mb-6 md:mb-8" data-stagger="8">
+        Timeline
+      </h2>
+      <TimelineMicro />
+    </section>
+
+    <!-- CTA -->
+    <section class="fade-stagger mb-8" data-stagger="14">
+      <div class="tldr-cta">
+        <p class="text-text-primary text-base mb-1.5">Convinced? Let's talk.</p>
+        <p class="text-text-secondary text-sm mb-6">Or keep exploring if you want the full picture.</p>
+        <div class="tldr-cta-actions">
+          <a href="mailto:hello@vheissu.me" class="tldr-cta-button tldr-cta-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            hello@vheissu.me
+          </a>
+          <a href="https://www.linkedin.com/in/vheissu/" target="_blank" rel="noopener noreferrer" class="tldr-cta-button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="/" class="tldr-cta-button">
+            Full portfolio
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* Availability badge */
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.15);
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgb(134, 239, 172);
+    letter-spacing: 0.02em;
+  }
+
+  .availability-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgb(74, 222, 128);
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.5);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Testimonial */
+  .testimonial {
+    padding: 2.5rem;
+    padding-top: 3rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(166, 171, 164, 0.2) 50%, transparent);
+  }
+
+  .testimonial-mark {
+    position: absolute;
+    top: 1.25rem;
+    left: 2rem;
+    color: var(--color-text-secondary);
+    opacity: 0.15;
+    width: 64px;
+    height: 64px;
+  }
+
+  .testimonial-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.625rem);
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--color-text-primary);
+    font-variation-settings: 'opsz' 28, 'SOFT' 0, 'WONK' 0;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .testimonial-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  .testimonial-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .testimonial-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Tools strip */
+  .tools-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tool-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+    white-space: nowrap;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .tool-tag svg {
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+  }
+
+  .tool-tag:hover {
+    border-color: rgba(255, 255, 255, 0.08);
+    background-color: var(--color-card-hover);
+    color: var(--color-text-primary);
+  }
+
+  .tool-tag:hover svg {
+    opacity: 0.8;
+  }
+
+  /* Keycap hero */
+  .keycap-hero {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-card);
+  }
+
+  .keycap-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 400px;
+  }
+
+  .keycap-hero-caption {
+    padding: 1rem 1.5rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .tldr-cta {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-card);
+  }
+
+  .tldr-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .tldr-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: var(--color-text-secondary);
+    font-size: 0.8125rem;
+    font-family: var(--font-sans);
+    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .tldr-cta-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--color-text-primary);
+  }
+
+  .tldr-cta-primary {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .tldr-cta-primary:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: white;
+  }
+
+  .tldr-cta-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-text-secondary);
+  }
+</style>

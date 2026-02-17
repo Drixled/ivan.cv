@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import StylesPanel from '../components/inspector/StylesPanel.tsx';
+import ModeChoice from '../components/ModeChoice.tsx';
+import ModeToggle from '../components/ModeToggle.tsx';
 
 interface Props {
   title?: string;
@@ -78,6 +80,10 @@ const ogImageURL = new URL(image, Astro.site);
       </main>
       <Footer />
     </div>
+
+    <!-- Mode Choice + Toggle -->
+    <ModeChoice client:load />
+    <ModeToggle client:load />
 
     <!-- Design Inspector -->
     <StylesPanel client:load />

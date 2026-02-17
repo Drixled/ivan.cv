@@ -1,0 +1,91 @@
+---
+const stats = [
+  { value: "12", unit: "years", label: "Shipping software and physical products" },
+  { value: "#2", unit: "Product of the Day", label: "Solo Product Hunt launch, 5.0 rating" },
+  { value: "12→4", unit: "steps", label: "Onboarding redesign at Neurelo" },
+  { value: "#1", unit: "Best-seller 2023", label: "GMK Mictlan keycap set" },
+  { value: "1st", unit: "Sequoia-backed", label: "First Mexican startup backed by Sequoia" },
+  { value: "80+", unit: "sites", label: "Shipped across e-commerce and marketing" },
+];
+---
+
+<div class="stats-grid">
+  {stats.map((stat, index) => (
+    <div class="stats-card fade-stagger" data-stagger={index + 2}>
+      <div class="stats-value-row">
+        <span class="stats-number">{stat.value}</span>
+        <span class="stats-unit">{stat.unit}</span>
+      </div>
+      <span class="stats-label">{stat.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .stats-card {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+
+  .stats-card:hover {
+    border-color: rgba(255, 255, 255, 0.06);
+    background-color: var(--color-card-hover);
+  }
+
+  .stats-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.375rem;
+  }
+
+  .stats-number {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #a6aba4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-variation-settings: 'opsz' 72, 'SOFT' 0, 'WONK' 1;
+  }
+
+  .stats-unit {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--color-text-secondary);
+    font-variation-settings: 'opsz' 16, 'SOFT' 0, 'WONK' 0;
+  }
+
+  .stats-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+</style>
