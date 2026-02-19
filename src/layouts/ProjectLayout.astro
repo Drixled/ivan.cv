@@ -111,7 +111,8 @@ const projectSchema = {
 </BaseLayout>
 
 <style>
-  .project-content :global(h2) {
+  .project-content :global(.eyebrow) {
+    display: block;
     font-family: var(--font-sans);
     font-weight: 500;
     font-size: 0.75rem;
@@ -119,11 +120,22 @@ const projectSchema = {
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-secondary);
-    max-width: 42rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3rem;
-    margin-bottom: 0.75rem;
+    margin-top: 3.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-content :global(.narrative:first-child .eyebrow) {
+    margin-top: 0;
+  }
+
+  .project-content :global(h2) {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 1.5rem;
+    line-height: 1.25;
+    color: var(--color-text-primary);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
   }
 
   .project-content :global(img) {
@@ -132,6 +144,7 @@ const projectSchema = {
     border-radius: 0.75rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: zoom-in;
+    margin: 2rem 0;
   }
 
   @media (min-width: 640px) {
@@ -144,6 +157,10 @@ const projectSchema = {
     cursor: zoom-out !important;
   }
 
+  .project-content :global(.image-grid) {
+    margin: 2rem 0;
+  }
+
   .project-content :global(.image-grid img) {
     margin: 0;
   }
@@ -154,25 +171,15 @@ const projectSchema = {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .project-content :global(h3) {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: 1.5rem;
-    line-height: 1.25;
-    color: var(--color-text-primary);
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-  }
-
   @media (min-width: 640px) {
-    .project-content :global(h3) {
+    .project-content :global(h2) {
       font-size: 1.75rem;
       line-height: 1.2;
     }
   }
 
   @media (min-width: 768px) {
-    .project-content :global(h3) {
+    .project-content :global(h2) {
       font-size: 2rem;
       line-height: 1.15;
     }
@@ -181,7 +188,7 @@ const projectSchema = {
   .project-content :global(.narrative p) {
     color: var(--color-text-primary);
     line-height: 1.7;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
   .project-content :global(blockquote) {
